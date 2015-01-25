@@ -5,21 +5,24 @@ return array(
 
 	'multi' => array(
 		'admin' => array(
-			'driver' =>'eloquent',
-			'model' =>'Login',
-			'table' =>'user'
+			'driver' => 'eloquent',
+			'model' => 'Login',
+			'table' => 'user'
 		),
+
 	),
 
 	'reminder' => array(
+
 		'email' => 'emails.auth.reminder',
+
 		'table' => 'password_reminders',
+
 		'expire' => 60,
+
 	),
 
 );
-
-
 /*
 
 

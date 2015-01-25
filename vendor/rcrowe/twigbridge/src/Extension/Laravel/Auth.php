@@ -30,10 +30,10 @@ class Auth extends Twig_Extension
      *
      * @param \Illuminate\Auth\AuthManager
      */
-    public function __construct(AuthManager $auth)
-    {
-        $this->auth = $auth;
-    }
+//    public function __construct(AuthManager $auth)
+//    {
+//        $this->auth = $auth;
+//    }
 
     /**
      * {@inheritDoc}

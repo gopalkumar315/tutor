@@ -1,0 +1,177 @@
+{% extends 'layouts/admin.twig' %}
+{% block title %}Subject{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('admin/assets/tablesort/tablesort.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading bg-red">
+            <h3 class="panel-title"><strong>Subject </strong> </h3>
+        </div>
+        <div  ng-controller="Subject" class="panel-body">
+            <div class="row">
+                <div class="col-md-12 m-b-20">
+                    <div class="btn-group">
+                        <button class="btn btn-danger" ng-click="addEnable = false;">Add Subject</button>
+                    </div>
+                </div>
+                <div  class="col-md-12 col-sm-12 col-xs-12 table-responsive table-red">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                <label><input type="search" class="form-control" ng-model="search" placeholder="Search a subject..."></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            {#<div class="DTTT_container">#}
+                                {#<a class="btn btn-default DTTT_button DTTT_button_pdf" id="ToolTables_table-editable_0"><span>PDF</span>#}
+                                    {#<div style="position: absolute; left: 0px; top: 0px; width: 78px; height: 37px; z-index: 99;">#}
+                                        {#<embed id="ZeroClipboard_TableToolsMovie_1" src="assets/plugins/datatables/swf/copy_csv_xls_pdf.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="78" height="37" name="ZeroClipboard_TableToolsMovie_1" align="middle" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="id=1&amp;width=78&amp;height=37" wmode="transparent"></div></a>#}
+                                {#<a class="btn btn-default DTTT_button DTTT_button_print" id="ToolTables_table-editable_1" title="View print view"><span>Print</span></a>#}
+                                {#<a class="btn btn-default DTTT_button DTTT_button_xls" id="ToolTables_table-editable_2"><span>Excel</span><div style="position: absolute; left: 0px; top: 0px; width: 86px; height: 37px; z-index: 99;"><embed id="ZeroClipboard_TableToolsMovie_2" src="assets/plugins/datatables/swf/copy_csv_xls_pdf.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="86" height="37" name="ZeroClipboard_TableToolsMovie_2" align="middle" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="id=2&amp;width=86&amp;height=37" wmode="transparent"></div></a>#}
+                                {#<a class="btn btn-default DTTT_button DTTT_button_csv" id="ToolTables_table-editable_3"><span>CSV</span><div style="position: absolute; left: 0px; top: 0px; width: 76px; height: 37px; z-index: 99;"><embed id="ZeroClipboard_TableToolsMovie_3" src="assets/plugins/datatables/swf/copy_csv_xls_pdf.swf" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="76" height="37" name="ZeroClipboard_TableToolsMovie_3" align="middle" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="id=3&amp;width=76&amp;height=37" wmode="transparent"></div></a>#}
+                            {#</div>#}
+                        </div>
+                    </div>
+                    <br>
+
+                    <table class="table table-striped table-hover" ts-wrapper id="">
+                        <thead>
+                        <tr>
+                            <th ts-criteria="id">id </th>
+                            <th ts-criteria="name">Subject name </th>
+                            <th ts-criteria="count">Total Sub subject</th>
+                            <th class="text-center">Action</th>
+                            <th class="text-center">Sub Subject</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-hide="addEnable">
+                            <td></td>
+                            <td><input type="text" ng-model="temp.name" class="form-control"/></td>
+                            <td></td>
+                            <td class="text-right">
+                                <button class="btn btn-success" ng-click="add(temp); "><i class="fa fa-check"></i> Save </button>
+                                <button class="btn btn-danger" ng-click="addEnable=true;"><i class="fa fa-reply"></i> Cancel </button>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr role="row" ng-repeat="item in items | filter:search"  ts-repeat>
+
+                            <td>
+                                <span>{{ '{{item.id}}' }}</span>
+                            </td>
+                            <td>
+                                <span ng-hide="editMode">{{ '{{item.name}}' }}</span>
+                               <input type="text" ng-show="editMode" ng-model="item.name" class="form-control" />
+                            </td>
+                            <td>
+                                <span ng-hide="editMode">{{ '{{item.count}}' }}</span>
+                            </td>
+
+                            <td class="text-center">
+                                <button class="btn btn-dark" ng-hide="editMode" ng-click="editMode=true;" >Edit</button>
+                                <button class="btn btn-danger" ng-hide="editMode" ng-click="delete(item);" > <i class="fa fa-times"></i> Delete</button>
+
+                                <button class="btn btn-success" ng-show="editMode" ng-click="edit(item);" > <i class="fa fa-check"></i> Save</button>
+                                <button class="btn btn-danger" ng-show="editMode" ng-click="editMode=false;" ><i class="fa fa-reply"></i> Cancel</button>
+                            </td>
+
+                            <td class="text-center">
+                                <a href="{{ url_to('admin/subsubject')~'/{{ item.id}}' }}" class="btn btn-dark">Add</a>
+                                <a href="{{ url_to('admin/sub.view')~'/{{ item.id}}' }}" class="btn btn-danger">View</a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+
+                        <tfoot>
+                        <td colspan="3">
+                            <div class="pagination">
+                                <ul>
+                                    <li ng-class="prevPageDisabled()">
+                                        <a href ng-click="prevPage()">« Prev</a>
+                                    </li>
+                                    <li ng-repeat="n in range()"
+                                        ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+                                        <a href="#">{{ '{{n+1}}' }}</a>
+                                    </li>
+                                    <li ng-class="nextPageDisabled()">
+                                        <a href ng-click="nextPage()">Next »</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        </tfoot>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('admin/assets/js/angular.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/tablesort/angular-tablesort.js') }}"></script>
+    <script>
+        var app = angular.module('MyApp',['tableSort']);
+        app.controller("Subject",function($scope, $http){
+            $scope.addEnable=true;
+
+            $scope.temp=[];
+            $http.get('{{ url_to('admin/subject.show') }}').success(function(data, status, headers, config){
+                     $scope.items=data;
+            }).error(function(data, status, headers, config){
+                alert(data);
+            })
+
+            //add subject
+            $scope.add=function(item){
+
+                if(typeof item.name == 'undefined')
+                {
+                    alert('Please enter subject name');
+                    return false;
+                }
+
+                if(typeof item.name !== 'undefined' && item.name != '')
+                {
+                    $scope.data={'name':item.name};
+                    $http.post('{{ url_to('admin/subject.add') }}',$scope.data).success(function(data,status){
+                        $scope.items=data;
+                        $scope.addEnable=true;
+                    }).error(function(data,status){
+                        console.log(data);
+                    });
+                }
+            }
+
+            //edit
+            $scope.edit=function(item){
+
+                $http.post('{{ url_to('admin/subject.edit') }}',item).success(function(data,status){
+                    $scope.items=data;
+                    $scope.editMode=false;
+                }).error(function(data,status){
+                    console.log(data);
+                });
+            }
+
+            $scope.delete=function(item){
+                var check=confirm('you really want to delete this subject!!!');
+                if(check){
+                    $http.post('{{ url_to('admin/subject.delete') }}',item).success(function(data,status){
+                        $scope.items=data;
+                        $scope.editMode=false;
+                    }).error(function(data,status){
+                        console.log(data);
+                    });
+                }
+            }
+        });
+    </script>
+{% endblock %}

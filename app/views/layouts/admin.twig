@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/plugins/datatables/dataTables.css') }}">
     <!-- END PAGE LEVEL STYLE -->
     <script src="{{ asset('admin/assets/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+    <link media="all" type="text/css" rel="stylesheet" href="{{ asset('admin/assets/redactor/redactor/redactor.css') }}">
     {% block stylesheets %}
     {% endblock %}
 </head>
@@ -77,8 +78,21 @@
 <script src="{{ asset('admin/assets/plugins/datatables/dataTables.tableTools.js') }}"></script>
 <script src="{{ asset('admin/assets/js/table_editable.js') }}"></script>
 <!-- END  PAGE LEVEL SCRIPTS -->
-
+<script src="{{ asset('admin/assets/redactor/redactor/redactor.min.js') }}"></script>
+<script>
+    $(document).ready(
+            function()
+            {
+                $('#redactor').redactor({
+                    imageUpload: '{{ url_to('admin/redactorupload') }}'
+                });
+            }
+    );
+</script>
+<script src="{{ asset('admin/assets/plugins/parsley/parsley.min.js') }}"></script>
+<script src="{{ asset('admin/assets/plugins/parsley/parsley.extend.js') }}"></script>
 {% block javascripts %}
+
 {% endblock %}
 <script src="{{ asset('admin/assets/js/application.js') }}"></script>
 </body>

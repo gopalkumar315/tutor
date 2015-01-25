@@ -51,19 +51,42 @@
                 <hr>
                 <div class="login-form">
                     <!-- BEGIN ERROR BOX -->
-                    <div class="alert alert-danger hide">
+                    {% if errors.any %}
+                        <div class="alert alert-danger">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <h4>Error!</h4>
-                        Your Error Message goes here
-                    </div>
+                        {% for error in errors.all %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {% if(session_has('failure')) %}
+                        <div class="alert alert-danger">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4>Error!</h4>
+                            {{ session_get('failure') }}
+                        </div>
+                    {% endif %}
+
+                    {% if(session_has('message')) %}
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4>Password Reset</h4>
+                            {{ session_get('message') }}
+                        </div>
+                    {% endif %}
+
                     <!-- END ERROR BOX -->
-                    <form action="#" method="post">
-                        <input type="text" placeholder="Username" class="input-field form-control user" />
-                        <input type="password" placeholder="Password" class="input-field form-control password" />
-                        <button id="submit-form" class="btn btn-login ladda-button" data-style="expand-left"><span class="ladda-label">login</span></button>
+                    <form action="{{  url_to('admin/login') }}" method="post">
+                        <input type="text" placeholder="email" name="email" value="{{ input_old('email') }}" class="input-field form-control user" />
+
+                        <input type="password" placeholder="Password" name="password" class="input-field form-control password" />
+
+                        <button  class="btn btn-login ladda-button" data-style="expand-left"><span class="ladda-label">login</span></button>
                     </form>
                     <div class="login-links">
-                        <a href="password_forgot.html">Forgot password?</a>
+                        <a href="{{ url_to('admin/forgot') }}">Forgot password?</a>
                     </div>
                 </div>
             </div>
@@ -84,20 +107,7 @@
 
 
 <script>
-    $(function() {
-        $('#submit-form').click(function(e){
-            e.preventDefault();
-            var l = Ladda.create(this);
-            l.start();
-            setTimeout(function () {
-                window.location.href = "index.html";
-            }, 2000);
-
-        });
-    });
-
-    $(function(){
-
+       $(function(){
         if($('body').attr('data-page') == 'login' || $('body').attr('data-page') == 'signup' || $('body').attr('data-page') == 'password'){
 
             /*  For icon rotation on input box foxus  */
