@@ -1,0 +1,67 @@
+{% extends 'layouts/admin.twig' %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading bg-green">
+            <div class="panel-title">
+                Our Features
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ url_to('admin/feature/add') }}"  class="btn btn-success ">Add Feature</a>
+                </div>
+            </div>
+
+            {% if(session_has('success')) %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4>Success!</h4>
+                            {{ session_get('success') }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-responsive">
+
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Title</th>
+                            <th>Updated at</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for row in data %}
+                            <tr>
+                                <td>{{ row.id }}</td>
+                                <td>{{ row.title }}</td>
+                                <td>{{ row.updated_at|date('d-M-y') }}</td>
+                                <td>
+                                    <a href="{{ url_to('admin/feature/show/'~ row.id) }}"
+                                       class="edit btn btn-sm btn-default" ng-click="add(temp); ">View </a>
+                                    <a href="{{ url_to('admin/feature/edit/'~ row.id) }}"
+                                       class="delete btn btn-sm btn-default" ng-click="addEnable=true;">Edit </a>
+                                    <a href="{{ url_to('admin/feature/destroy/'~ row.id) }}"
+                                       onClick="javascript:return confirm('Are you sure to Delete ?')"
+                                       class="delete btn btn-sm btn-default" ng-click="addEnable=true;">Delete </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}

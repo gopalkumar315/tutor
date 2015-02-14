@@ -8,7 +8,7 @@
 {% block content %}
     <div class="panel panel-default">
         <div class="panel-heading bg-red">
-            <h3 class="panel-title"><strong>Subject : {{ data.name|title }} </strong> </h3>
+            <h3 class="panel-title"><strong>Category : {{ data.name|title }} </strong> </h3>
         </div>
         <div  ng-controller="Subject" class="panel-body">
             <div class="row">
@@ -24,7 +24,9 @@
                                 <label><input type="search" class="form-control" ng-model="search" placeholder="Search a subject..."></label>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 text-right">
+                            <a href="{{ url_to('admin/add_subject') }}" class="btn btn-primary m-t-10"> Add Subject</a>
+                            <a href="#" class="btn btn-success m-t-10"> View Subjects</a>
                         </div>
                     </div>
                     <br>
@@ -33,7 +35,8 @@
                         <thead>
                         <tr>
                             <th ts-criteria="id">id </th>
-                            <th ts-criteria="name">Subject name </th>
+                            <th ts-criteria="name">Name </th>
+                            <th ts-criteria="name">Category </th>
                             <th ts-criteria="created_at">Created at </th>
                             <th ts-criteria="updated_at">Updated at </th>
                             <th class="text-center">Action</th>
@@ -50,13 +53,15 @@
                                 <span ng-hide="editMode">{{ '{{item.name}}' }}</span>
                             </td>
 
-                            <td>  <span ng-hide="editMode">{{ '{{item.detail.created_at|myDateFormat }}' }}</span>  </td>
-                            <td>  <span ng-hide="editMode">{{ '{{item.detail.updated_at|myDateFormat }}' }}</span>  </td>
+                            <td><span ng-hide="editMode">{{ '{{item.sub}}' }}</span></td>
+
+                            <td>  <span ng-hide="editMode">{{ '{{item.created_at|myDateFormat }}' }}</span>  </td>
+                            <td>  <span ng-hide="editMode">{{ '{{item.updated_at|myDateFormat }}' }}</span>  </td>
 
                             <td class="text-center">
-                                <button class="btn btn-primary">View</button>
-                                <a href="{{ url_to('admin/sub.edit')~'/{{ item.id }}' }}" class="btn btn-dark">Edit</a>
-                                <button class="btn btn-danger" ng-hide="editMode" ng-click="delete(item);" > <i class="fa fa-times"></i> Delete</button>
+                                <a href="{{ url_to('admin/subject.view')~'/{{ item.id }}' }}" class="btn btn-sm btn-default">View</a>
+                                <a href="{{ url_to('admin/sub.edit')~'/{{ item.id }}' }}" class="btn btn-sm btn-default">Edit</a>
+                                <button class="btn btn-sm btn-default" ng-hide="editMode" ng-click="delete(item);" >Delete</button>
                             </td>
 
                         </tr>
@@ -99,23 +104,27 @@
             $scope.addEnable=true;
 
             $scope.temp=[];
-            $http.get('{{ url_to('admin/sub.show')}}/{{ id }}').success(function(data, status, headers, config){
-                $scope.items=data;
-            }).error(function(data, status, headers, config){
-                alert(data);
-            })
+
+            $scope.refresh=function(){
+                $http.get('{{ url_to('admin/subject.show_all')}}').success(function(data, status, headers, config){
+                    $scope.items=data;
+                }).error(function(data, status, headers, config){
+                    alert(data);
+                })
+            }
 
 
             $scope.delete=function(item){
                 var check=confirm('you really want to delete this subject!!!');
                 if(check){
                     $http.post('{{ url_to('admin/sub.delete') }}',item).success(function(data,status){
-                        $scope.items=data;
+                        $scope.refresh();
                     }).error(function(data,status){
                         console.log(data);
                     });
                 }
             }
+            $scope.refresh();
         });
         app.filter('myDateFormat', function myDateFormat($filter){
             return function(text){
@@ -123,5 +132,7 @@
                 return $filter('date')(tempdate, "dd-MMM-yyyy h:mm:ss a");
             }
         });
+
+
     </script>
 {% endblock %}

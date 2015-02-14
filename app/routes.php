@@ -11,11 +11,8 @@
 |
 */
 
-
-Route::get('/', function()
-{
-	return View::make('admin/login');
-});
+//front//
+//Route::Controller('/', 'IndexController');
 
 /**
  * admin
@@ -61,8 +58,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function(){
 	Route::post('subject.delete','SubjectController@delete');
 
 	//show sub subject page
-	Route::get('subsubject/{id}','SubjectController@subsubject');
-	Route::post('sub.add','SubjectController@sub_add');
+	Route::get('add_subject','SubjectController@add_subject');
+	Route::post('store_subject','SubjectController@store_subject');
 	Route::post('sub.edit','SubjectController@sub_edit');
 	Route::get('sub.view/{id}','SubjectController@sub_view');
 	Route::get('sub.show/{id}','SubjectController@sub_show');
@@ -71,6 +68,12 @@ Route::group(array('prefix' => 'admin', 'before' => 'auth'), function(){
 	Route::post('sub.delete','SubjectController@sub_delete');
 	Route::post('sub.edit_done','SubjectController@sub_edit_done');
 
+	Route::get('subject.view_all','SubjectController@view_all');
+	Route::get('subject.show_all','SubjectController@show_all');
+
+	Route::get('subject.view/{id}','SubjectController@view');
+
+	Route::Controller('feature','FeatureController');
 
 });
 

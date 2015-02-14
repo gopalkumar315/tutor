@@ -7,7 +7,7 @@ class SubjectController extends Controller{
 
     //show main subject
     public function show(){
-        $data=Subject::where('parent_id','0')->get();
+        $data=Category::where('parent','0')->get();
         foreach($data as $row)
         {
             $row->count=$row->count()->count();
@@ -18,14 +18,14 @@ class SubjectController extends Controller{
     //add main subject
     public function add(){
         $data=json_decode(file_get_contents('php://input'),true);
-        Subject::create($data);
+        Category::create($data);
         $this->show();
     }
 
-    //edit
+    //edit Category
     public function edit(){
         $data=json_decode(file_get_contents('php://input'));
-        $content=Subject::where('id',$data->id)->first();
+        $content=Category::where('id',$data->id)->first();
         $content->name=$data->name;
         $content->save();
         $this->show();
@@ -34,32 +34,23 @@ class SubjectController extends Controller{
     //delete
     public function delete(){
         $data=json_decode(file_get_contents('php://input'));
-        Subject::destroy($data->id);
+        Category::destroy($data->id);
         $this->show();
     }
 
     //redirect to add sub subject
-    public function subsubject($id){
-        return View::make('admin.add_sub_subject')->with('id',$id);
+    public function add_subject(){
+        $data=Category::where('parent','0')->get();
+        return View::make('admin.add_subject')->with('data',$data);
     }
 
     /**
      * @return mixed
      * add subsubject
      */
-    public function sub_add(){
-       $data=new Subject();
-       $data->name=Input::get('name');
-       $data->parent_id=Input::get('id');
-       $data->save();
-
-       $id=Subject::max('id');
-
-       $data=new SubjectDetail();
-       $data->tag_line=Input::get('tag_line');
-       $data->subject_id=$id;
-       $data->description=Input::get('description');
-       $data->save();
+    public function store_subject(){
+       $data=Input::all();
+       Subject::create($data);
        return Redirect::back()->with('success','Data Successfully Inserted');
     }
 
@@ -68,15 +59,12 @@ class SubjectController extends Controller{
      */
 
     public function sub_view($id){
-        $data=Subject::where('id',$id)->first(array('name'));
-        return View::make('admin.view_sub_subject')->with('id',$id)->with('data',$data);
+        $data=Category::where('id',$id)->first(array('name'));
+        return View::make('admin.view_subject')->with('id',$id)->with('data',$data);
     }
 
     public function sub_show($id){
-        $data=Subject::where('parent_id',$id)->get();
-        foreach($data as $row){
-            $row->detail=$row->detail()->first();
-        }
+        $data=Subject::where('subject_id',$id)->get();
         echo json_encode($data);
     }
 
@@ -87,8 +75,6 @@ class SubjectController extends Controller{
     public function sub_delete(){
         $data=json_decode(file_get_contents('php://input'));
         Subject::destroy($data->id);
-        SubjectDetail::where('subject_id',$data->id)->delete();
-        $this->sub_show($data->parent_id);
     }
 
     /**
@@ -97,7 +83,8 @@ class SubjectController extends Controller{
 
     public function sub_edit($id){
         $data=Subject::find($id);
-        return View::make('admin.edit_sub_subject')->with('data',$data);
+        $category=Category::all();
+        return View::make('admin.edit_subject')->with('data',$data)->with('category',$category);
     }
 
     /**
@@ -105,15 +92,29 @@ class SubjectController extends Controller{
      */
 
     public function sub_edit_done(){
-        $data=Subject::where('id',Input::get('id'))->first();
-        $data->name=Input::get('name');
-        $data->save();
-
-        $data=SubjectDetail::where('subject_id',Input::get('id'))->first();
-        $data->tag_line=Input::get('tag_line');
-        $data->description=Input::get('description');
-        $data->save();
-
+        $data=Input::all();
+        Subject::where('id',$data['id'])->update($data);
         return Redirect::back()->with('success','Edition Done Successfully');
     }
+
+    public function show_all(){
+        $data=Subject::all();
+        foreach($data as $row){
+            $row->sub=$row->sub_cat()->pluck('name');
+        }
+        return $data;
+    }
+
+    //redirect to view all page
+    public function view_all(){
+        return View::make('admin.view_all_subject');
+    }
+
+    //particular subject view
+
+    public function view($id){
+        $data=Subject::find($id);
+        return View::make('admin.view')->with('data',$data);
+    }
+
 }

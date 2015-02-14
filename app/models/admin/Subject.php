@@ -9,18 +9,9 @@ class Subject extends Eloquent implements UserInterface, RemindableInterface  {
 
     use UserTrait, RemindableTrait;
     protected $table = 'subject';
-    public $timestamps = false;
-    protected $guarded = array();
+    protected $guarded=array('id');
 
-    public function count(){
-        return $this->hasMany('Subject','parent_id','id');
+    public function sub_cat(){
+        return $this->hasOne('Category','id','subject_id');
     }
-
-    public function detail(){
-        return $this->hasOne('SubjectDetail','subject_id','id');
-    }
-
-
-
-
 }

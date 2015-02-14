@@ -1,0 +1,60 @@
+{% extends 'layouts/admin.twig' %}
+{% block content %}
+    <div class="panel pane-default">
+        <div class="panel-heading bg-primary">
+            <div class="panel-title">
+                Add Feature
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ url_to('admin/feature') }}" class="btn btn-primary"> Back</a>
+                </div>
+            </div>
+
+            {% if(session_has('success')) %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <h4>Success!</h4>
+                            {{ session_get('success') }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="{{ url_to('admin/feature/save') }}" id="form2" class="form-horizontal" data-parsley-validate="" method="post" enctype="multipart/form-data">
+                        <div class="controls">
+                            <br/>
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" name="title" required/>
+                        </div>
+
+                        <div class="controls">
+                            <br/>
+                            <label for="file">Upload Image</label>
+                            <input type="file" class="form-control" required="" name="file"/>
+                        </div>
+
+                        <div class="controls">
+                            <br/>
+                            <label for="description">Description</label>
+                            <textarea name="description" required="" id="redactor" cols="30" rows="10"></textarea>
+                        </div>
+
+                        <div class="controls">
+                            <br/>
+                            <input type="submit" class="btn btn-success" value="save"/>
+                            <a href="{{ url_previous() }}" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -12,10 +12,14 @@
         </div>
         <div  ng-controller="Subject" class="panel-body">
             <div class="row">
-                <div class="col-md-12 m-b-20">
+                <div class="col-md-6 m-b-20">
                     <div class="btn-group">
-                        <button class="btn btn-danger" ng-click="addEnable = false;">Add Subject</button>
+                        <button class="btn btn-danger" ng-click="addEnable = false;">Add Category</button>
                     </div>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="{{ url_to('admin/add_subject') }}" class="btn btn-primary m-t-10"> Add Subject</a>
+                    <a href="{{ url_to('admin/subject.view_all') }}" class="btn btn-success m-t-10"> View Subjects</a>
                 </div>
                 <div  class="col-md-12 col-sm-12 col-xs-12 table-responsive table-red">
                     <div class="row">
@@ -41,10 +45,9 @@
                         <thead>
                         <tr>
                             <th ts-criteria="id">id </th>
-                            <th ts-criteria="name">Subject name </th>
-                            <th ts-criteria="count">Total Sub subject</th>
+                            <th ts-criteria="name">Category </th>
+                            <th ts-criteria="count">Total Subject</th>
                             <th class="text-center">Action</th>
-                            <th class="text-center">Sub Subject</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -53,36 +56,30 @@
                             <td><input type="text" ng-model="temp.name" class="form-control"/></td>
                             <td></td>
                             <td class="text-right">
-                                <button class="btn btn-success" ng-click="add(temp); "><i class="fa fa-check"></i> Save </button>
-                                <button class="btn btn-danger" ng-click="addEnable=true;"><i class="fa fa-reply"></i> Cancel </button>
+                                <button class="edit btn btn-sm btn-default" ng-click="add(temp); "><i class="fa fa-check"></i> Save </button>
+                                <button class="delete btn btn-sm btn-default" ng-click="addEnable=true;"><i class="fa fa-reply"></i> Cancel </button>
                             </td>
                             <td></td>
                         </tr>
                         <tr role="row" ng-repeat="item in items | filter:search"  ts-repeat>
 
-                            <td>
-                                <span>{{ '{{item.id}}' }}</span>
-                            </td>
+                            <td><span>{{ '{{item.id}}' }}</span></td>
+
                             <td>
                                 <span ng-hide="editMode">{{ '{{item.name}}' }}</span>
-                               <input type="text" ng-show="editMode" ng-model="item.name" class="form-control" />
+                                <input type="text" ng-show="editMode" ng-model="item.name" class="form-control" />
                             </td>
                             <td>
-                                <span ng-hide="editMode">{{ '{{item.count}}' }}</span>
+                                <span ng-hide="editMode"> <a href="{{ url_to('admin/sub.view/'~'{{ item.id }}') }}"> {{ '{{item.count}}' }} </a> </span>
                             </td>
 
                             <td class="text-center">
-                                <button class="btn btn-dark" ng-hide="editMode" ng-click="editMode=true;" >Edit</button>
-                                <button class="btn btn-danger" ng-hide="editMode" ng-click="delete(item);" > <i class="fa fa-times"></i> Delete</button>
-
-                                <button class="btn btn-success" ng-show="editMode" ng-click="edit(item);" > <i class="fa fa-check"></i> Save</button>
-                                <button class="btn btn-danger" ng-show="editMode" ng-click="editMode=false;" ><i class="fa fa-reply"></i> Cancel</button>
+                                <button class="edit btn btn-sm btn-default" ng-hide="editMode" ng-click="editMode=true;"> <i class="fa fa-pencil"></i> Edit</button>
+                                <button class="delete btn btn-sm btn-default" ng-hide="editMode" ng-click="delete(item);" > <i class="fa fa-times-circle"></i> Delete</button>
+                                <button class="edit btn btn-sm btn-default" ng-show="editMode" ng-click="edit(item);" > <i class="fa fa-check"></i> Save</button>
+                                <button class="delete btn btn-sm btn-default" ng-show="editMode" ng-click="editMode=false;" ><i class="fa fa-reply"></i> Cancel</button>
                             </td>
 
-                            <td class="text-center">
-                                <a href="{{ url_to('admin/subsubject')~'/{{ item.id}}' }}" class="btn btn-dark">Add</a>
-                                <a href="{{ url_to('admin/sub.view')~'/{{ item.id}}' }}" class="btn btn-danger">View</a>
-                            </td>
                         </tr>
 
                         </tbody>
@@ -134,7 +131,7 @@
 
                 if(typeof item.name == 'undefined')
                 {
-                    alert('Please enter subject name');
+                    alert('Please enter category name');
                     return false;
                 }
 

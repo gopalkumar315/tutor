@@ -10,6 +10,8 @@
        <div class="panel-heading">
            <div class="panel-title">
                <strong>Add Subject</strong>
+               <br/>
+
            </div>
            <div class="panel-body">
                {% if(session_has('success')) %}
@@ -20,23 +22,42 @@
                    </div>
                {% endif %}
 
-               <form action="{{ url_to('admin/sub.add') }}" method="post" novalidate="" id="form2" class="form-horizontal" data-parsley-validate="">
-                   <div class="form-group">
+               <div class="row">
+                   <div class="col-md-12 text-right">
+                       <a href="{{ url_previous() }}" class="btn btn-primary m-t-10">Back</a>
+                   </div>
+               </div>
+
+               <form action="{{ url_to('admin/store_subject') }}" method="post" novalidate="" id="form2" class="form-horizontal" data-parsley-validate="">
+                   <div class="controls">
+                       <br/>
                        <label class="control-label">Subject Name <span class="asterisk">*</span></label>
                        <input type="text" name="name" required="" class="form-control"  />
                    </div>
 
-                   <div class="form-group">
+                   <div class="controls">
+                       <br/>
                        <label class="control-label">Tag Line <span class="asterisk">*</span> </label>
                        <input type="text" name="tag_line" required="" class="form-control" />
                    </div>
 
-                   <div class="form-group">
-                       <label class="control-label">Description <span class="asterisk">*</span></label>
-                       <textarea id="redactor" name="description"  class="form-control">
+                   <div class="controls">
+                       <br/>
+                       <label for="subject_id">Select Category</label>
+                       <select name="subject_id" required="" class="form-control" multiple>
+                            {% for row in data %}
+                                <option value="{{ row.id }}">
+                                    {{ row.name }}
+                                </option>
+                            {% endfor %}
+                       </select>
+                   </div>
 
-                       </textarea>
-                       <input type="hidden" name="id" value="{{ id }}"/>
+                   <div class="controls">
+                       <br/>
+                       <label class="control-label">Description <span class="asterisk">*</span></label>
+                       <textarea id="redactor" name="description"  class="form-control"></textarea>
+                       <br/>
                    </div>
                    <button type="submit" class="btn btn-success">Save</button>
                    <a href="{{ url_to('admin/subject') }}"  class="btn btn-danger">Cancel</a>

@@ -1,0 +1,25 @@
+{% extends 'layouts/admin.twig' %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading bg-red">
+            <div class="panel-title">
+                {{ data.name }}
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <b>Category Name:</b> {{ data.sub_cat().first().name }}<br/><br/>
+            <b>Subject Name:</b> {{ data.name }}<br/><br/>
+            <b>Tag Line:</b> {{ data.tag_line }}<br/><br/>
+            <b>Description</b>
+            <br/>
+            {{ data.description|raw }}
+
+            <br/><br/>
+            <b>Last Updated at:</b> {{ data.updated_at|date('d-M-y') }}
+            <br/><br/>
+            <a href="{{ url_previous() }}" class="btn btn-primary">Back</a>
+
+        </div>
+    </div>
+{% endblock %}

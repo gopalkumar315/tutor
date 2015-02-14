@@ -1,0 +1,36 @@
+{% extends 'layouts/admin.twig' %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading bg-red">
+            <div class="panel-title">
+                Feature : {{ data.title }}
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a href="{{ url_to('admin/feature') }}" class="btn btn-danger">Back</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="title">Title</label> : <b>{{ data.title }}</b><br/>
+
+                    <label for="image">Image</label><br/>
+                    <img src="{{ asset('images/'~data.file) }}" style="height:100px; width:100px;" alt="{{ data.title }}"/><br/><br/>
+
+                    <label for="description">Description</label><br/>
+                    {{ data.description|raw }}<br/>
+
+                    <label for="updated_at"> Updated_at</label> : <b>{{ data.updated_at }}</b><br/><br/>
+
+                    <a href="{{ url_to('admin/feature/edit/'~data.id) }}" class="btn btn-success" > Edit </a>
+                    <a href="{{ url_to('admin/feature/') }}" class="btn btn-danger" > Back </a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

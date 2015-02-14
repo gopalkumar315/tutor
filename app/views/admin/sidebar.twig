@@ -5,6 +5,21 @@
             <li>
                 {#<a href="{{ siteUrl('admin/home') }}"><i class="fa fa-dashboard"></i><span class="sidebar-text">Dashboard</span></a>#}
             </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-truck"></i>
+                    <span class="sidebar-text">Front</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="submenu collapse">
+                    <li>
+                        <a href="{{ url_to('admin/feature') }}"><span class="sidebar-text">Features</span></a>
+                    </li>
+                </ul>
+            </li>
+
+
             <li>
                 <a href="#">
                     <i class="fa fa-truck"></i>
@@ -15,24 +30,11 @@
                     <li>
                         <a href="{{ url_to('admin/subject') }}"><span class="sidebar-text">Subjects</span></a>
                     </li>
-                    <li>
-                        {#<a href="{{ siteUrl('admin/carrier') }}"><span class="sidebar-text">Carrier</span></a>#}
-                    </li>
-                    <li>
-                        {#<a href="{{ siteUrl('admin/package') }}"><span class="sidebar-text">Package</span></a>#}
-                    </li>
-                    <li>
-                        {#<a href="{{ siteUrl('admin/packagecombo') }}"><span class="sidebar-text">Package Combinations</span></a>#}
-                    </li>
-                    <li>
-                        {#<a href="{{ siteUrl('admin/shipping') }}"><span class="sidebar-text">Prices</span></a>#}
-                    </li>
-
-                    <li>
-                        {#<a href="{{ siteUrl('admin/country') }}"><span class="sidebar-text">Country Zone</span></a>#}
-                    </li>
                 </ul>
             </li>
+
+
+
 
         </ul>
     </div>

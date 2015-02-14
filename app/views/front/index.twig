@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>myTutor.com</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap-theme.min.css')}}">
+    <link href="{{ asset('front/css/full-slider.css')}} " rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/style.css')}} ">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/animate.css')}} ">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .feature_box{
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+{# Nav bar #}
+{% include 'front.navbar.twig' %}
+<!-- Full Page Image Background Carousel Header -->
+<header id="myCarousel" class="carousel slide">
+
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <!-- Set the second background image using inline CSS below. -->
+            <div class="fill" style="background-image:url({{ asset('front/images/bg2.png') }});"></div>
+            <div class="carousel-caption wow bounceInDown center">
+                <h2>Find An Awsome <span>Tutor</span> For You</h2>
+                <form>
+                    <div>
+                        <select class="select">
+                            <option>Select Category</option>
+                        </select>
+
+                        <select class="select">
+                            <option>Select Course</option>
+                        </select>
+
+                        <input type="submit" class="submit" value="Search">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="item">
+            <!-- Set the first background image using inline CSS below. -->
+            <div class="fill" style="background-image:url({{ asset('front/images/bg1.png') }});"></div>
+            <div class="carousel-caption">
+                <h2>Find An Awsome <span>Tutor</span> For You</h2>
+                <form>
+                    <div>
+                        <select class="select">
+                            <option>Select Category</option>
+                        </select>
+
+                        <select class="select">
+                            <option>Select Course</option>
+                        </select>
+
+                        <input type="submit" class="submit" value="Search">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- page content  features-->
+<div class="container">
+    <div class="features">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInLeft center">
+                <div class="row">
+                    <div class="span12 wow col-md-2"><img src="{{ asset('front/images/watch.png')}}"></div>
+                    <div class="col-md-10"><span class="title">24/7 Access</span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
+                        <br>
+                        <a href="#" class="read_more">read more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInDown center">
+                <div class="row">
+                    <div class="col-md-2"><img src="{{ asset('front/images/blub.png') }}"></div>
+                    <div class="col-md-10"><span class="title">The Best Tutors</span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
+                        <br>
+                        <a href="#" class="read_more">read more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInRight center">
+                <div class="row">
+                    <div class="col-md-2"><img src="{{ asset('front/images/target.png') }}"></div>
+                    <div class="col-md-10"><span class="title">Personalized</span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
+                        <br>
+                        <a href="#" class="read_more">read more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-6 feature_box span3 wow bounceInRight center">
+                <div class="row">
+                    <div class="col-md-2"><img src="{{ asset('front/images/blub.png') }}"></div>
+                    <div class="col-md-10"><span class="title">The Best Tutors</span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
+                        <br>
+                        <a href="#" class="read_more">read more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInUp center">
+                <div class="row">
+                    <div class="col-md-2"><img src="{{ asset('front/images/share.png') }}"></div>
+                    <div class="col-md-10"><span class="title">Variety of Subjects</span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
+                        <br>
+                        <a href="#" class="read_more">read more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInLeft center">
+                <div class="row">
+                    <div class="col-md-2"><img src="{{ asset('front/images/blub.png') }}"></div>
+                    <div class="col-md-10"><span class="title">The Best Tutors</span></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
+                        <br>
+                        <a href="#" class="read_more">read more</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end page feature -->
+
+<!-- page testimonial -->
+<div class="testimonial">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Our Students Love Us</h3>
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12 center wow fadeInLeft">
+                <div class="testimonial_text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and types.
+                    <div class="name">CHRIS BOWLER</div>
+                    <a href="#" class="read_more">Inda newspaper</a>
+                </div>
+                <div class="testimonial_img text-center">
+                    <img src="{{ asset('front/images/test_img1.png') }}">
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 center wow fadeInDown">
+                <div class="testimonial_text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and types.
+                    <div class="name">CHRIS BOWLER</div>
+                    <a href="#" class="read_more">Inda newspaper</a>
+                </div>
+                <div class="testimonial_img text-center">
+                    <img src="{{ asset('front/images/test_img2.png') }}">
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 col-xs-12 center wow fadeInRight">
+                <div class="testimonial_text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.Lorem Ipsum is simply dummy text of the printing and types.
+                    <div class="name">CHRIS BOWLER</div>
+                    <a href="#" class="read_more">Inda newspaper</a>
+                </div>
+                <div class="testimonial_img text-center">
+                    <img src="{{ asset('front/images/test_img3.png') }}">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- end page testimonial -->
+
+<!-- page location -->
+<div class="location">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="{{ asset('front/images/location.png') }}">
+                <span class="title">Explore By Location</span>
+            </div>
+
+            <div class="col-md-8 col-sm-12 col-xs-12 col-md-offset-2 text-center">
+                <div class="location_bg">
+                    <form>
+                        <select class="location_box">
+                            <option>Location</option>
+                        </select>
+
+                        <input type="submit" class="location_submit" Value="Locate">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page location -->
+
+<!-- page content subjects -->
+<div class="subjects">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8"><div class="title">We've got you covered</div></div>
+            <div class="col-md-4 text-right"><a href="#" class="view_all">View All Subjects</a></div>
+        </div>
+
+        <div class="row">
+
+                {% for row in data %}
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <ul>
+                            <li><a href="#" class="sub_label">{{ row.name }}</a></li>
+                       {% for row1 in row.subject %}
+                           <li><a href="#">{{ row1.name }}</a></li>
+                       {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+
+        </div>
+    </div>
+</div>
+<!-- end page content subjects -->
+
+{#footer#}
+{% include 'front.footer.twig' %}
+
+
+<script src="{{ asset('front/js/jquery.js')}} "></script>
+<script src="{{ asset('front/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('front/js/wow.min.js') }}"></script>
+<script>
+    new WOW().init();
+</script>
+
+<script>
+    $('.carousel').carousel({
+        interval: 3000 //changes the speed
+    })
+</script>
+
+<script>
+    $(window).scroll(function(){
+        if ($('body').scrollTop() > 0) {
+            if($(this).width() > 768){
+                $(".navbar-brand").addClass("scroll_nav");
+                $(".nav>li>a").addClass("scroll_nav");
+            }
+        } else{
+            $(".navbar-brand").removeClass("scroll_nav");
+            $(".nav>li>a").removeClass("scroll_nav");
+        }
+    });
+</script>
+</body>
+</html>
