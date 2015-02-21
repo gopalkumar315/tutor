@@ -1,0 +1,42 @@
+{% extends 'layouts/front.twig' %}
+{% block breadcrumb %}
+    <div class="breadcrumb">
+        <a href="{{ url_to('index/subjects') }}" title="Subjects">Subjects</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="subjects">
+        <h1>Subjects</h1>
+
+        <div class="row">
+
+            {% set i=1 %}
+            {% for row in data %}
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <h2>{{ row.name }}</h2>
+                <hr/>
+                <p>{{ row.tag_line }}</p>
+                <ul>
+                    {% for row1 in row.subject %}
+                        <li><a href="{{ url_to('index/subject/'~row1.id) }}">{{ row1.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {% if i==3 %}
+        </div>
+        <div class="row">
+            {% set i=0 %}
+            {% endif %}
+            {% set i=i+1 %}
+
+            {% endfor %}
+        </div>
+    </div>
+
+    {#<div class="subjects">#}
+    {#<h1>Other Categories</h1>#}
+    {#</div>#}
+{% endblock %}
+

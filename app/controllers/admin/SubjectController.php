@@ -83,6 +83,7 @@ class SubjectController extends Controller{
 
     public function sub_edit($id){
         $data=Subject::find($id);
+
         $category=Category::all();
         return View::make('admin.edit_subject')->with('data',$data)->with('category',$category);
     }

@@ -1,0 +1,20 @@
+{% extends 'layouts/front.twig' %}
+
+{% block breadcrumb %}
+    <div class="breadcrumb">
+        <a href="{{ url_to('index/subjects') }}" title="Subjects">Subjects</a>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="{{ url_to('index/subject/'~data.id) }}" title="{{ data.name }}">{{ data.name }}</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="subject_view">
+        <h1>{{ data.name }}</h1>
+        <p>{{ data.tag_line }}</p>
+        {{ data.description|raw }}
+        <a href="#" title="Find {{ data.name }} Tutor" class="btn sky_blue">Find {{ data.name }} Tutor</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'layouts/front.twig' %}
+{% block breadcrumb %}
+    <div class="breadcrumb">
+        <a href="#" title="Forgot Password">Forgot password</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="p_heading">
+        <h1>Forgot Password</h1>
+    </div>
+
+    <div class="col-md-6" style="padding:0px;">
+
+        <form action="{{ url_to('index/reset') }}" method="post" >
+            <div class="signup">
+                <br/>
+                <div class="pi">
+                    <div class="title">Forgot Password</div>
+                </div>
+
+                <div class="form">
+                    <br/>
+                    <table>
+                        <tr>
+                            <td>Email</td>
+                            <td><input type="text" class="txt_box"/></td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Send"  class="login_btn"/>
+                                <br/><br/>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+        </form>
+    </div>
+{% endblock %}

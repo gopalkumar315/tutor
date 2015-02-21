@@ -60,6 +60,15 @@
 	font-size: 14px;
 	border:1px solid #999;
 }
+
+.carousel-caption .select option{
+
+	background:rgba(0,0,0,0.08);
+	color:#000;
+
+
+}
+
 .carousel-caption h2 span{
 	color:#e74c3c;
 }

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap-theme.min.css') }}">
+    <link href="{{ asset('front/css/full-slider.css') }} " rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/front.css') }} ">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/animate.css') }} ">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .feature_box {
+            margin-bottom: 40px;
+        }
+
+        .carousel {
+            height: 40% !important;
+        }
+    </style>
+</head>
+<body ng-app="MyApp" ng-controller="mycontroller">
+
+{# Nav bar #}
+{% include 'front.navbar.twig' %}
+{% include 'front.slider.twig' %}
+
+{#content area#}
+<div class="container" style="max-width: 1000px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="content">
+
+                <div class="breadcrumb">
+                    <a href="{{ url_to('index') }}" title="Home">Mytutor</a>
+                </div>
+                {#breadcrumb#}
+                {% block breadcrumb %}{% endblock %}
+
+                <div style="clear:both;"></div>
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{#footer#}
+{% include 'front.footer.twig' %}
+
+
+<script src="{{ asset('front/js/jquery.js') }} "></script>
+<script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('front/js/wow.min.js') }}"></script>
+<script>
+    new WOW().init();
+</script>
+
+<script>
+    $('.carousel').carousel({
+        interval: 3000 //changes the speed
+    })
+</script>
+
+<script>
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 0) {
+            if ($(this).width() > 768) {
+                $(".navbar-brand").addClass("scroll_nav");
+                $(".nav>li>a").addClass("scroll_nav");
+            }
+        } else {
+            $(".navbar-brand").removeClass("scroll_nav");
+            $(".nav>li>a").removeClass("scroll_nav");
+        }
+    });
+</script>
+
+
+    <script src="{{ asset('admin/assets/js/angular.min.js') }}"></script>
+    <script>
+        var app=angular.module('MyApp',[]);
+        app.controller('mycontroller',function($scope,$http){
+
+            $scope.my_course=[];
+            $scope.category=[];
+            $scope.c_id='';
+
+            $http.get('{{ url_to('index/category') }}').success(function(data){
+                $scope.category=data;
+            }).error(function(data){
+                console.log(data);
+            });
+
+
+            $scope.course=function(){
+                $scope.id=$scope.c_id;
+                $http.get('{{ url_to('index/course') }}/'+$scope.id).success(function(data){
+                    $scope.my_course=data;
+                }).error(function(data){
+                    console.log(data);
+                })
+            }
+        });
+    </script>
+
+    {% block javascript %}
+    {% endblock %}
+
+</body>
+</html>
+

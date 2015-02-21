@@ -1,0 +1,46 @@
+{% extends 'layouts/front.twig' %}
+
+{% block breadcrumb %}
+    <div class="breadcrumb">
+        <a href="{{ url_to('index/signin') }}" title="Sign in">Sign In</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="p_heading">
+        <h1>Sign in</h1>
+    </div>
+
+    <div class="col-md-6" style="padding:0px;">
+        <div class="signup">
+            <br/>
+
+            <div class="pi">
+                <div class="title">Reset Password</div>
+            </div>
+
+            <div class="form">
+                <br/>
+                <table>
+                    <tr>
+                        <td>Password</td>
+                        <td><input type="text" class="txt_box"/></td>
+                    </tr>
+
+                    <tr>
+                        <td>Confirm Password</td>
+                        <td><input type="password" class="txt_box"/></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Reset"  class="login_btn"/>
+                            <br/><br/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

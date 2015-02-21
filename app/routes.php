@@ -12,7 +12,9 @@
 */
 
 //front//
-//Route::Controller('/', 'IndexController');
+Route::Controller('index', 'IndexController');
+Route::Controller('tutor','TutorController');
+
 
 /**
  * admin

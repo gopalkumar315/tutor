@@ -38,7 +38,7 @@
                         <label for="subject_id">Category</label>
                         <select name="subject_id" class="form-control" multiple id="">
                             {% for row in category %}
-                                {% if row.id==data.id %}
+                                {% if row.id == data.subject_id %}
                                     <option value="{{ row.id }}" selected> {{ row.name }} </option>
                                     {% else %}
                                         <option value="{{ row.id }}"> {{ row.name }} </option>
@@ -57,7 +57,7 @@
                         <br/>
                     </div>
                     <button type="submit" class="btn btn-success">Save</button>
-                    <a href="{{ url_to('admin/sub.view/'~data.parent_id) }}"  class="btn btn-danger">Cancel</a>
+                    <a href="{{ url_to('admin/sub.view/'~data.subject_id) }}"  class="btn btn-danger">Cancel</a>
                 </form>
             </div>
         </div>

@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body>
+<body ng-app="MyApp" ng-controller="mycontroller">
 
 {# Nav bar #}
 {% include 'front.navbar.twig' %}
@@ -41,19 +41,24 @@
             <div class="fill" style="background-image:url({{ asset('front/images/bg2.png') }});"></div>
             <div class="carousel-caption wow bounceInDown center">
                 <h2>Find An Awsome <span>Tutor</span> For You</h2>
-                <form>
+
+                <form method="post"  onsubmit="return validate();"  action="{{ url_to('index/tutor') }}">
                     <div>
-                        <select class="select">
-                            <option>Select Category</option>
+                    <select name="category" class="select" ng-change="course()"  ng-model="c_id">
+
+                        <option ng-repeat="item in category" value="{{ '{{ item.id }}' }}" >{{ '{{ item.name }}' }}</option>
+                        <option value="">Select a Category</option>
                         </select>
 
-                        <select class="select">
-                            <option>Select Course</option>
+                        <select name="course" ng-model="sel_course"  class="select">
+                            <option ng-repeat="item in my_course"  value="{{ '{{ item.id }}' }}">{{ '{{ item.name }}' }}</option>
+                            <option value="">Select Course</option>
                         </select>
 
                         <input type="submit" class="submit" value="Search">
                     </div>
                 </form>
+
             </div>
         </div>
 
@@ -62,19 +67,24 @@
             <div class="fill" style="background-image:url({{ asset('front/images/bg1.png') }});"></div>
             <div class="carousel-caption">
                 <h2>Find An Awsome <span>Tutor</span> For You</h2>
-                <form>
+
+                <form method="post" name="form1" onsubmit="return validate();" action="{{ url_to('index/tutor') }}">
                     <div>
-                        <select class="select">
-                            <option>Select Category</option>
+                        <select name="category" class="select" ng-change="course()"  ng-model="c_id">
+
+                            <option ng-repeat="item in category" value="{{ '{{ item.id }}' }}" >{{ '{{ item.name }}' }}</option>
+                            <option value="">Select a Category</option>
                         </select>
 
-                        <select class="select">
-                            <option>Select Course</option>
+                        <select name="course" ng-model="sel_course"  class="select">
+                            <option ng-repeat="item in my_course"  value="{{ '{{ item.id }}' }}">{{ '{{ item.name }}' }}</option>
+                            <option value="">Select Course</option>
                         </select>
 
                         <input type="submit" class="submit" value="Search">
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -85,95 +95,23 @@
 <div class="container">
     <div class="features">
         <div class="row">
+
+        {% for data in feature %}
             <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInLeft center">
                 <div class="row">
-                    <div class="span12 wow col-md-2"><img src="{{ asset('front/images/watch.png')}}"></div>
-                    <div class="col-md-10"><span class="title">24/7 Access</span></div>
+                    <div class="span12 wow col-md-2"><img src="{{ asset('images/'~data.file)}}"></div>
+                    <div class="col-md-10"><span class="title">{{ data.title }}</span></div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-2"></div>
-                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
-                        <br>
-                        <a href="#" class="read_more">read more</a>
+                    <div class="col-md-10">
+                        {{ data.description|slice(0,160)|raw  }}
+                        <a href="{{ url_to('index/viewfeature/'~data.id) }}" class="read_more">read more</a>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInDown center">
-                <div class="row">
-                    <div class="col-md-2"><img src="{{ asset('front/images/blub.png') }}"></div>
-                    <div class="col-md-10"><span class="title">The Best Tutors</span></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
-                        <br>
-                        <a href="#" class="read_more">read more</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInRight center">
-                <div class="row">
-                    <div class="col-md-2"><img src="{{ asset('front/images/target.png') }}"></div>
-                    <div class="col-md-10"><span class="title">Personalized</span></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
-                        <br>
-                        <a href="#" class="read_more">read more</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 col-xs-6 feature_box span3 wow bounceInRight center">
-                <div class="row">
-                    <div class="col-md-2"><img src="{{ asset('front/images/blub.png') }}"></div>
-                    <div class="col-md-10"><span class="title">The Best Tutors</span></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
-                        <br>
-                        <a href="#" class="read_more">read more</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInUp center">
-                <div class="row">
-                    <div class="col-md-2"><img src="{{ asset('front/images/share.png') }}"></div>
-                    <div class="col-md-10"><span class="title">Variety of Subjects</span></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
-                        <br>
-                        <a href="#" class="read_more">read more</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 col-xs-6 feature_box wow bounceInLeft center">
-                <div class="row">
-                    <div class="col-md-2"><img src="{{ asset('front/images/blub.png') }}"></div>
-                    <div class="col-md-10"><span class="title">The Best Tutors</span></div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-10">Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor enim.
-                        <br>
-                        <a href="#" class="read_more">read more</a>
-                    </div>
-                </div>
-            </div>
+        {% endfor %}
 
         </div>
     </div>
@@ -260,22 +198,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8"><div class="title">We've got you covered</div></div>
-            <div class="col-md-4 text-right"><a href="#" class="view_all">View All Subjects</a></div>
+            <div class="col-md-4 text-right"><a href="{{ url_to('index/subjects') }}" class="view_all" title="View All Subjects">View All Subjects</a></div>
         </div>
-
         <div class="row">
-
-                {% for row in data %}
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <ul>
-                            <li><a href="#" class="sub_label">{{ row.name }}</a></li>
-                       {% for row1 in row.subject %}
-                           <li><a href="#">{{ row1.name }}</a></li>
-                       {% endfor %}
-                        </ul>
-                    </div>
-                {% endfor %}
-
+            {% for row in data %}
+                <div class="col-md-2 col-sm-4 col-xs-6">
+                    <ul>
+                        <li><a href="#" class="sub_label">{{ row.name }}</a></li>
+                   {% for row1 in row.subject %}
+                       <li><a href="{{ url_to('index/subject/'~row1.id) }}" title="{{ row1.name }}">{{ row1.name }}</a></li>
+                   {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -293,6 +228,22 @@
 </script>
 
 <script>
+    function validate(){
+        if(document.form1.category.value == '' || document.form1.category.value== null  ){
+            alert('select categorty');
+            return false;
+        }
+
+        if(document.form1.course.value == '' || document.form1.course.value== null  ){
+            alert('select course');
+            return false;
+        }
+    }
+
+
+</script>
+
+<script>
     $('.carousel').carousel({
         interval: 3000 //changes the speed
     })
@@ -300,7 +251,7 @@
 
 <script>
     $(window).scroll(function(){
-        if ($('body').scrollTop() > 0) {
+        if ($(this).scrollTop() > 0) {
             if($(this).width() > 768){
                 $(".navbar-brand").addClass("scroll_nav");
                 $(".nav>li>a").addClass("scroll_nav");
@@ -308,6 +259,33 @@
         } else{
             $(".navbar-brand").removeClass("scroll_nav");
             $(".nav>li>a").removeClass("scroll_nav");
+        }
+    });
+</script>
+
+<script src="{{ asset('admin/assets/js/angular.min.js') }}"></script>
+<script>
+    var app=angular.module('MyApp',[]);
+    app.controller('mycontroller',function($scope,$http){
+
+        $scope.my_course=[];
+        $scope.category=[];
+        $scope.c_id='';
+
+        $http.get('{{ url_to('index/category') }}').success(function(data){
+            $scope.category=data;
+        }).error(function(data){
+            console.log(data);
+        });
+
+
+        $scope.course=function(){
+            $scope.id=$scope.c_id;
+            $http.get('{{ url_to('index/course') }}/'+$scope.id).success(function(data){
+                $scope.my_course=data;
+            }).error(function(data){
+                console.log(data);
+            })
         }
     });
 </script>
