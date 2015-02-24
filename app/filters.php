@@ -54,7 +54,9 @@ Route::filter('auth',function(){
 	if(Auth::admin()->guest()) return Redirect::guest('/');
 });
 
-
+Route::filter('tutor',function(){
+	if(Auth::tutor()->guest()) return Redirect::guest('/index/signin');
+});
 
 Route::filter('auth.basic', function()
 {
@@ -95,3 +97,5 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+

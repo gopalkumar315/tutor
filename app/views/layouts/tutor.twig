@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('tutor/css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('tutor/css/sidebar.css') }}">
+    <script src="{{ asset('tutor/js/jquery-1.10.2.min.js') }}"></script>
+    <script src="{{ asset('tutor/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('tutor/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('tutor/css/tutor.css') }}"/>
+    {#<link rel="stylesheet" href="{{ asset('tutor/css/font-awesome.min.css') }}">#}
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+{% include 'tutor.navbar.twig' %}
+
+<div id="wrapper">
+     {% include 'tutor.sidebar.twig' %}
+     {% block content %}{% endblock %}
+</div>
+<!-- /#wrapper -->
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+<style type="text/css">
+    #page-content-wrapper{
+        display:none;
+    }
+    @media screen and (max-width:800px) {
+        #page-content-wrapper{
+            display:block;
+        }
+    }
+</style>
+    {% block javascripts %}
+    {% endblock %}
+</body>
+</html>

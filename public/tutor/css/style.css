@@ -1,0 +1,34 @@
+*:focus{
+	outline: none;	
+}
+.navbar{
+	margin-bottom: 0px;
+}
+.navbar-default{
+	background-color: #7AA3E6;
+	border:0px;
+	border-radius: 0px;
+}
+.navbar-toggle{
+	border:0px;
+	padding:12px 10px;
+}
+
+.icon-bar{
+	background-color:#FFFFFF !important;
+}
+.navbar-brand{
+	margin-top: 4px;
+	color: #FFFFFF !important;
+}
+.navbar-default .navbar-nav>li>a{
+	color: #FFFFFF;
+	font-size: 13px;
+	font-weight: bold;
+}
+.navbar-default .navbar-nav li:last-child{
+	margin-top: -5px;
+}
+.navbar-default .navbar-nav li{
+	margin-top: 3px;
+}

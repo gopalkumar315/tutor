@@ -10,4 +10,6 @@ class Login extends Eloquent implements UserInterface, RemindableInterface  {
     use UserTrait, RemindableTrait;
     protected $table = 'user';
 
+    protected $guarded=array('id');
+
 }

@@ -12,33 +12,47 @@
 
     <div class="col-md-6" style="padding:0px;">
 
-        <form action="{{ url_to('index/reset') }}" method="post" >
             <div class="signup">
+                {% if session_has('success') %}
+                    <div class="success_alert">{{ session_get('success') }}</div>
+                {% endif %}
+
                 <br/>
                 <div class="pi">
                     <div class="title">Forgot Password</div>
                 </div>
 
-                <div class="form">
-                    <br/>
-                    <table>
-                        <tr>
-                            <td>Email</td>
-                            <td><input type="text" class="txt_box"/></td>
-                        </tr>
+                <form action="{{ url_to('tutor/forgot') }}" method="post">
+                    <div class="form">
+                        <br/>
 
-                        <tr>
-                            <td></td>
-                            <td>
-                                <input type="submit" value="Send"  class="login_btn"/>
-                                <br/><br/>
-                            </td>
-                        </tr>
+                        <table>
+                            <tr>
+                                <td>Username</td>
+                                <td><input value="{{ input_old('username') }}" name="username" type="text" class="txt_box"/>
+                                    <div class="error">
+                                        {{ errors.first('username') }}
+                                    </div>
+                                </td>
+                            </tr>
 
-                    </table>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="submit" value="Reset"  class="login_btn"/>
+                                    <br/><br/>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </form>
+
+                <div class="form_footer">
+                    <a href="{{ url_to('index/signin') }}">User Login</a>
+                    <div class="clear"></div>
                 </div>
-
             </div>
-        </form>
+
     </div>
 {% endblock %}

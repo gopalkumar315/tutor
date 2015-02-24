@@ -9,6 +9,11 @@ return array(
 			'model' => 'Login',
 			'table' => 'user'
 		),
+		'tutor' => array(
+			'driver' => 'eloquent',
+			'model' => 'Login',
+			'table' => 'user'
+		),
 
 	),
 

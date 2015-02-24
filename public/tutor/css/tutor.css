@@ -1,0 +1,161 @@
+/*breadcrumbs*/
+.breadcrumb{
+    position: relative;
+    background: #7AA3E6;
+    padding:10px;
+    height: 25px;
+    float:left;
+    margin-right:20px;
+}
+
+.breadcrumb:after {
+    left: 97%;
+    top: 34%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(241, 244, 244, 0);
+    border-left-color: #7AA3E6;
+    border-width: 13px;
+    margin-top: -10px;
+}
+
+.breadcrumb a:hover {
+    color:#000;
+}
+.breadcrumb a{
+    color:#fff;
+    position: relative;
+    text-decoration:none;
+    top:-7px;
+}
+
+.content .success_alert{
+    background:  #FFF6BF;
+    padding: 11px 20px 11px 25px;
+    margin-top: 4px;
+    margin-bottom: 15px;
+    display: block;
+    color: #333;
+    font-weight: 600;
+    text-shadow: 1px 1px 0px #FFF;
+    width: auto;
+    border-radius: 22px;
+}
+
+
+/*tutor index*/
+
+.content{
+    padding:15px 50px;
+}
+.heading h1{
+    color: #5B5B5B;
+    font-size: 175%;
+    font-family: arial;
+    margin-top: 9px;
+    margin-bottom: 11px;
+    font-weight: normal;
+}
+
+.box{
+    background: #666;
+    padding:7px 0 7px 15px;
+}
+
+.error{
+    color:#e74c3c;
+    font-size: 13px;
+}
+
+.box .title{
+    color:#fff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.box_border{
+    padding:20px 30px;
+    border-left: 1px solid #DCDCDC;
+    border-bottom: 1px solid #DCDCDC;
+    border-right: 1px solid #DCDCDC;
+}
+
+.box_border .form table{
+    width: 100%;
+}
+
+.form table tr td:first-child{
+    width:30%;
+    padding-top:12px;
+    padding-left:30px;
+    font-size: 13px;
+    color:#000;
+}
+.form .select{
+    padding:9px;
+    width: 50%;
+    background: #DCDCDC;
+    outline:none;
+    border:none;
+}
+
+.form .date_select{
+    padding:9px;
+    width: 25%;
+    background: #DCDCDC;
+    outline:none;
+    border:none;
+}
+
+.form .txt_box{
+    margin-top:3px;
+    margin-bottom:3px;
+    width:80%;
+    border-radius:0px;
+    border:1px solid #999;
+    padding:7px;
+}
+.form .txt_box:focus{
+    border: 1px solid #7AA3E6;
+    outline: medium none;
+    box-shadow: 0px 0px 4px #7AA3E6;
+}
+.textarea{
+    margin-top:3px;
+    margin-bottom:3px;
+    width:80%;
+    border-radius:0px;
+    border:1px solid #999;
+    padding:7px;
+}
+
+.textarea:focus{
+    border: 1px solid #7AA3E6;
+    outline: medium none;
+    box-shadow: 0px 0px 4px #7AA3E6;
+}
+
+.submit{
+    margin:0px 0px 50px 0px;
+}
+
+.submit i{
+    padding:10px 0px;
+    font-size: 13px;
+}
+
+ .submit_btn{
+
+    outline:none;
+    border:none;
+    background:#7AA3E6;
+    color:#fff;
+    padding:10px 15px;
+}
+
+
+

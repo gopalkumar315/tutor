@@ -15,6 +15,13 @@
 Route::Controller('index', 'IndexController');
 Route::Controller('tutor','TutorController');
 
+/**
+ * tutor
+ */
+Route::group(array('prefix' => 'tpanel', 'before' => 'tutor'), function(){
+	Route::controller('index','TindexController');
+});
+
 
 /**
  * admin

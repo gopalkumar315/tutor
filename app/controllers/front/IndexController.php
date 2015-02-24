@@ -83,10 +83,4 @@ class IndexController extends Controller{
         return View::make('tutor.forgot');
     }
 
-
-    //reset link
-    public function postReset(){
-        return View::make('tutor.reset');
-    }
-
 }

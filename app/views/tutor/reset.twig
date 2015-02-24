@@ -15,32 +15,51 @@
         <div class="signup">
             <br/>
 
+            {% if session_has('success') %}
+                <div class="success_alert">{{ session_get('success') }}</div>
+            {% endif %}
+
             <div class="pi">
                 <div class="title">Reset Password</div>
             </div>
 
-            <div class="form">
-                <br/>
-                <table>
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="text" class="txt_box"/></td>
-                    </tr>
+            <form action="{{ url_to('tutor/resetpassword') }}" method="post">
+                <div class="form">
+                    <br/>
+                    <table>
+                        <tr>
+                            <td>Password</td>
+                            <td>
+                                <input type="text" name="password" class="txt_box"/>
+                                <div class="error">
+                                    {{ errors.first('password') }}
+                                </div>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>Confirm Password</td>
-                        <td><input type="password" class="txt_box"/></td>
-                    </tr>
+                        <tr>
+                            <td>Confirm Password</td>
+                            <td>
+                                <input type="password" name="password_confirm" class="txt_box"/>
+                                <div class="error">
+                                    {{ errors.first('password_confirm') }}
+                                </div>
+                                <input type="hidden" name="username" value="{{ data.username }}" />
+                                <input type="hidden" name="reset_code" value="{{ data.reset }}" />
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" value="Reset"  class="login_btn"/>
-                            <br/><br/>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Reset"  class="login_btn"/>
+                                <br/><br/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+
         </div>
     </div>
 {% endblock %}
