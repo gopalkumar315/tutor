@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 25, 2015 at 09:33 PM
+-- Generation Time: Feb 24, 2015 at 08:05 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -23,51 +23,114 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subject`
+-- Table structure for table `category`
 --
 
-CREATE TABLE IF NOT EXISTS `subject` (
+CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `parent_id` int(11) NOT NULL,
+  `parent` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `subject`
+-- Dumping data for table `category`
 --
 
-INSERT INTO `subject` (`id`, `name`, `parent_id`) VALUES
-(1, 'dfdsfggg', 0),
-(2, 'abc', 0),
-(3, 'fgfgf', 0),
-(5, 'English', 0),
-(8, 'abcd', 1),
-(9, 'Grammer', 5);
+INSERT INTO `category` (`id`, `name`, `parent`) VALUES
+(1, 'English', 0),
+(6, 'Math', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subject_detail`
+-- Table structure for table `feature`
 --
 
-CREATE TABLE IF NOT EXISTS `subject_detail` (
+CREATE TABLE IF NOT EXISTS `feature` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `file` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `feature`
+--
+
+INSERT INTO `feature` (`id`, `title`, `description`, `file`, `created_at`, `updated_at`) VALUES
+(4, '24/7 Access', '<p>Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies  magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor  enim.</p>', '6wFKJLwatch.png', '2015-02-14 09:15:42', '2015-02-14 09:15:42'),
+(5, 'The Best Tutors', '<p>Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies  magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor  enim.</p>', 'HwwQ1vblub.png', '2015-02-14 09:16:20', '2015-02-14 09:16:20'),
+(6, 'Personalized', '<p>Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies  magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor  enim.</p>', 'cI2Ntptarget.png', '2015-02-14 09:16:50', '2015-02-14 09:16:50'),
+(7, 'Variety of Subjects', '<p>Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies  magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor  enim.</p>', '8Blx4Yshare.png', '2015-02-14 09:17:16', '2015-02-14 09:17:16'),
+(8, 'Variety of Subjects', '<p>Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies  magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor  enim.</p>', '8Blx4Yshare.png', '2015-02-14 09:17:16', '2015-02-14 09:17:16'),
+(9, 'Variety of Subjects', '<p>Phasellus enim libero, blandit vel sapien vitae, condimentum ultricies  magna et. Quisque euismod orci ut et lobortis aliquam. Aliquam in tortor  enim.</p>', '8Blx4Yshare.png', '2015-02-14 09:17:16', '2015-02-14 09:17:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject`
+--
+
+CREATE TABLE IF NOT EXISTS `subject` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `subject_id` int(11) NOT NULL,
   `tag_line` text NOT NULL,
   `description` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
--- Dumping data for table `subject_detail`
+-- Dumping data for table `subject`
 --
 
-INSERT INTO `subject_detail` (`id`, `subject_id`, `tag_line`, `description`, `created_at`, `updated_at`) VALUES
-(2, 8, 'Nothing', '<h1>Get Better Grades in Chemistry</h1><p>Don’t stress about chemistry homework. Get a tutor. Our expert  chemistry tutors are ready to help you 24/7 with everything from  balancing chemical equations to finding the oxidation number to  understanding acids and bases.</p><h3>Finding Chemistry Help Is Easy</h3><p>All you have to do it tell us a little about your chemistry problem.  Then, we’ll connect you to the best chemistry tutor available to help.  Every session is personalized and will address your specific questions.  You’ll work one-to-one with a chemistry tutor in our online classroom  and can cover whatever topic you’re working on, including:</p><ul><li>Atomic theory</li><li>Polymerization</li><li>Molecular structure</li><li>Chemical equilibrium</li><li>Oxidation reduction</li><li>Chemical Reactions</li></ul>', '2015-01-25 20:26:40', '2015-01-25 14:56:40'),
-(3, 9, 'nthing now', '<p>dsfhjdshfddjhfjdshfjkshdfdfd</p>', '2015-01-25 12:51:42', '2015-01-25 12:51:42');
+INSERT INTO `subject` (`id`, `subject_id`, `tag_line`, `description`, `created_at`, `updated_at`, `name`) VALUES
+(7, 1, 'Get help learning english from basic Grammer to geometric formulas to derivatives.', '<h3>One-to-One Discrete Math Sessions</h3><p>\r\n	Large class lectures can be long and distracting, having a  personalized tutor makes a big difference. With topics like Euler trails  and circuits, permutations and combinations, it is easy to get confused  in class. Find your tutor now and master the rules of sum and product  today!</p><h3>24/7 Expert Tutoring</h3><p>\r\n	Whether you’re trying to finish homework before soccer practice or  studying at 11 pm the night before a big test, we’ve got you covered.  Our tutors are available 24/7 to help with everything from o-notation to  logical equivalence. Stop going to class confused. Finish your homework  on time and be confident in class by finding a personal discrete math  tutor online!</p><h3>Learning in the Online Classroom</h3><p>\r\n	Learning discrete math in our online classroom is simple and  efficient. You can easily work through proofs with your tutor on the  interactive whiteboard. Being able to work in real time on the  whiteboard allows your tutor to see each step you make and help you  along the way. Are you unsure of the difference between induction and  recursion that came up on last week’s test? No problem. Utilize the  file-sharing tool to go over old tests and homework directly in the  classroom. You and your tutor will be able to chat back and forth to  master concepts together.</p><h3>Improve Your Grades Today</h3><p>\r\n	Solving a problem in class with the teacher in front of you is  different than trying to do your homework alone after school. Get the  extra help you need outside of the classroom to get on your way to  better grades. Our tutors are available whenever you need them to give  you 24/7 expert help online. From high school to college level courses,  our tutors can help you with the topics your stuck on.</p>', '2015-02-15 17:14:25', '2015-02-15 11:44:25', 'English Grammer'),
+(8, 6, 'Algebra Tutors', '<h3>One-to-One Discrete Math Sessions</h3><p>\r\n	Large class lectures can be long and distracting, having a  personalized tutor makes a big difference. With topics like Euler trails  and circuits, permutations and combinations, it is easy to get confused  in class. Find your tutor now and master the rules of sum and product  today!</p><h3>24/7 Expert Tutoring</h3><p>\r\n	Whether you’re trying to finish homework before soccer practice or  studying at 11 pm the night before a big test, we’ve got you covered.  Our tutors are available 24/7 to help with everything from o-notation to  logical equivalence. Stop going to class confused. Finish your homework  on time and be confident in class by finding a personal discrete math  tutor online!</p><h3>Learning in the Online Classroom</h3><p>\r\n	Learning discrete math in our online classroom is simple and  efficient. You can easily work through proofs with your tutor on the  interactive whiteboard. Being able to work in real time on the  whiteboard allows your tutor to see each step you make and help you  along the way. Are you unsure of the difference between induction and  recursion that came up on last week’s test? No problem. Utilize the  file-sharing tool to go over old tests and homework directly in the  classroom. You and your tutor will be able to chat back and forth to  master concepts together.</p><h3>Improve Your Grades Today</h3><p>\r\n	Solving a problem in class with the teacher in front of you is  different than trying to do your homework alone after school. Get the  extra help you need outside of the classroom to get on your way to  better grades. Our tutors are available whenever you need them to give  you 24/7 expert help online. From high school to college level courses,  our tutors can help you with the topics your stuck on.</p>', '2015-02-15 12:49:02', '2015-02-15 12:49:02', 'Algebra Tutors'),
+(9, 6, 'Calculus Tutors', '<h3>One-to-One Discrete Math Sessions</h3>\r\n<p>\r\n	Large class lectures can be long and distracting, having a  personalized tutor makes a big difference. With topics like Euler trails  and circuits, permutations and combinations, it is easy to get confused  in class. Find your tutor now and master the rules of sum and product  today!\r\n</p>\r\n<h3>24/7 Expert Tutoring</h3>\r\n<p>\r\n	Whether you’re trying to finish homework before soccer practice or  studying at 11 pm the night before a big test, we’ve got you covered.  Our tutors are available 24/7 to help with everything from o-notation to  logical equivalence. Stop going to class confused. Finish your homework  on time and be confident in class by finding a personal discrete math  tutor online!\r\n</p>\r\n<h3>Learning in the Online Classroom</h3>\r\n<p>\r\n	Learning discrete math in our online classroom is simple and  efficient. You can easily work through proofs with your tutor on the  interactive whiteboard. Being able to work in real time on the  whiteboard allows your tutor to see each step you make and help you  along the way. Are you unsure of the difference between induction and  recursion that came up on last week’s test? No problem. Utilize the  file-sharing tool to go over old tests and homework directly in the  classroom. You and your tutor will be able to chat back and forth to  master concepts together.\r\n</p>\r\n<h3>Improve Your Grades Today</h3>\r\n<p>\r\n	Solving a problem in class with the teacher in front of you is  different than trying to do your homework alone after school. Get the  extra help you need outside of the classroom to get on your way to  better grades. Our tutors are available whenever you need them to give  you 24/7 expert help online. From high school to college level courses,  our tutors can help you with the topics your stuck on.\r\n</p>', '2015-02-15 12:49:41', '2015-02-15 12:49:41', 'Calculus Tutors'),
+(10, 6, 'Trigonometry Tutors', '<h3>\r\n	One-to-One Discrete Math Sessions\r\n</h3>\r\n<p>\r\n	Large class lectures can be long and distracting, having a  personalized tutor makes a big difference. With topics like Euler trails  and circuits, permutations and combinations, it is easy to get confused  in class. Find your tutor now and master the rules of sum and product  today!\r\n</p>\r\n<h3>24/7 Expert Tutoring</h3>\r\n<p>\r\n	Whether you’re trying to finish homework before soccer practice or  studying at 11 pm the night before a big test, we’ve got you covered.  Our tutors are available 24/7 to help with everything from o-notation to  logical equivalence. Stop going to class confused. Finish your homework  on time and be confident in class by finding a personal discrete math  tutor online!\r\n</p>\r\n<h3>Learning in the Online Classroom</h3>\r\n<p>\r\n	Learning discrete math in our online classroom is simple and  efficient. You can easily work through proofs with your tutor on the  interactive whiteboard. Being able to work in real time on the  whiteboard allows your tutor to see each step you make and help you  along the way. Are you unsure of the difference between induction and  recursion that came up on last week’s test? No problem. Utilize the  file-sharing tool to go over old tests and homework directly in the  classroom. You and your tutor will be able to chat back and forth to  master concepts together.\r\n</p>\r\n<h3>Improve Your Grades Today</h3>\r\n<p>\r\n	Solving a problem in class with the teacher in front of you is  different than trying to do your homework alone after school. Get the  extra help you need outside of the classroom to get on your way to  better grades. Our tutors are available whenever you need them to give  you 24/7 expert help online. From high school to college level courses,  our tutors can help you with the topics your stuck on.\r\n</p>', '2015-02-15 12:51:19', '2015-02-15 12:51:19', 'Trigonometry Tutors');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_profile`
+--
+
+CREATE TABLE IF NOT EXISTS `t_profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address1` varchar(255) NOT NULL,
+  `address2` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `postcode` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `mobile` varchar(255) NOT NULL,
+  `dob` date NOT NULL,
+  `file` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `availability` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `t_profile`
+--
+
+INSERT INTO `t_profile` (`id`, `title`, `first_name`, `last_name`, `email`, `address1`, `address2`, `country`, `city`, `postcode`, `phone`, `mobile`, `dob`, `file`, `description`, `availability`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'Mr', 'fgf', 'Kumar', 'gopalkumar315@gmail.com', 'h.no 256,Islam gunj,prem nagar,Ludhiana', 'h.no 256,Islam gunj,prem nagar,Ludhiana', 'India', 'India', '141001', '+918591819500', '+918591819500', '1993-11-25', '20150223123729.png', 'dsfdsfdsfds', 'sdfsdfsdfsdfsdf', 2, '2015-02-23 13:29:27', '2015-02-23 07:59:27');
 
 -- --------------------------------------------------------
 
@@ -77,24 +140,28 @@ INSERT INTO `subject_detail` (`id`, `subject_id`, `tag_line`, `description`, `cr
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `reset` varchar(255) NOT NULL,
   `confirm_code` varchar(255) NOT NULL,
-  `confirm_status` varchar(255) NOT NULL,
+  `confirm_status` int(11) NOT NULL,
   `remember_token` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `type` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `last_logout` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`, `reset`, `confirm_code`, `confirm_status`, `remember_token`, `created_at`, `updated_at`, `type`) VALUES
-(1, 'abc@gmail.com', '$2y$10$QsPTHMoV1Bcd75UlmbL3fOlG9JdBOFcXbN.cLQliom.L68xvfFHbC', 'tj1aeZmQ6ZjOL76dwXV3Zx1LgtpoXlcc2DQLTIyxgsYTC2FMaGMOFToC4jvR', '', '1', 'kHcpeOTXhBraI673pxk5IAmjOpUI8l7KiQ9uXgg2mmqD0d1mYVaJ8OrU1gca', '2015-01-25 06:40:28', '2015-01-25 01:10:28', 'admin');
+INSERT INTO `user` (`id`, `last_login`, `email`, `password`, `reset`, `confirm_code`, `confirm_status`, `remember_token`, `created_at`, `updated_at`, `type`, `username`, `last_logout`) VALUES
+(1, '2015-02-24 15:35:57', 'abc@gmail.com', '$2y$10$QsPTHMoV1Bcd75UlmbL3fOlG9JdBOFcXbN.cLQliom.L68xvfFHbC', 'tj1aeZmQ6ZjOL76dwXV3Zx1LgtpoXlcc2DQLTIyxgsYTC2FMaGMOFToC4jvR', '', 1, 'YsGqQQfilSXlUaMyAWl717yF4be5xvnm5Ht5XQxKAVeuZFcrbPncCvJ4vYth', '2015-02-21 17:37:35', '2015-02-07 01:31:14', 'admin', 'abc@gmail.com', '0000-00-00 00:00:00'),
+(2, '2015-02-24 18:55:33', 'gopalkumar315@gmail.com', '$2y$10$F/QILt7kFhglvV1hdwLYFuDlCmBWC7GVxcJZafs145V2MYTGkEgoy', '', 'tj1aeZmQ6ZjOL76dwXV3Zx1LgtpoXlcc2DQLTIyxgsYTC2FMaGMOFToC4jvR', 0, 'QcNukpfyjtLAS4Huat5AsQdVliqflET1K8h04FwPiBrS8TUCso3dtS7KVCzz', '2015-02-24 18:55:33', '2015-02-24 13:25:33', 'tutor', 'gopalkumar315', '2015-02-24 12:57:23');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
