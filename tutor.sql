@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 24, 2015 at 08:05 PM
+-- Generation Time: Mar 01, 2015 at 07:35 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -72,6 +72,105 @@ INSERT INTO `feature` (`id`, `title`, `description`, `file`, `created_at`, `upda
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE IF NOT EXISTS `feedback` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `name`, `email`, `description`, `user_id`) VALUES
+(1, 'dfd', 'gopalkumar315@gmail.com', 'fgfg', 2),
+(2, 'fgfd', 'gfgfd@gmail.com', 'fdgdfg', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `location`
+--
+
+CREATE TABLE IF NOT EXISTS `location` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `longitude` varchar(255) NOT NULL,
+  `latitude` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `postal_code` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`id`, `longitude`, `latitude`, `address`, `postal_code`, `user_id`) VALUES
+(1, 'fg', 'fgfg', 'dfgf', '1111', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `privacy`
+--
+
+CREATE TABLE IF NOT EXISTS `privacy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mobile` int(11) NOT NULL,
+  `phone` int(11) NOT NULL,
+  `email` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request`
+--
+
+CREATE TABLE IF NOT EXISTS `request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_links`
+--
+
+CREATE TABLE IF NOT EXISTS `social_links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `facebook` varchar(255) NOT NULL,
+  `twitter` varchar(255) NOT NULL,
+  `linked_in` varchar(255) NOT NULL,
+  `google_plus` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `social_links`
+--
+
+INSERT INTO `social_links` (`id`, `facebook`, `twitter`, `linked_in`, `google_plus`, `user_id`) VALUES
+(1, 'https://www.facebook.com/gopalkumar315', 'https://www.facebook.com/gopalkumar315', 'https://www.facebook.com/gopalkumar315', 'https://www.facebook.com/gopalkumar315', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subject`
 --
 
@@ -122,6 +221,8 @@ CREATE TABLE IF NOT EXISTS `t_profile` (
   `user_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `qualification` text NOT NULL,
+  `experience` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
@@ -129,8 +230,8 @@ CREATE TABLE IF NOT EXISTS `t_profile` (
 -- Dumping data for table `t_profile`
 --
 
-INSERT INTO `t_profile` (`id`, `title`, `first_name`, `last_name`, `email`, `address1`, `address2`, `country`, `city`, `postcode`, `phone`, `mobile`, `dob`, `file`, `description`, `availability`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Mr', 'fgf', 'Kumar', 'gopalkumar315@gmail.com', 'h.no 256,Islam gunj,prem nagar,Ludhiana', 'h.no 256,Islam gunj,prem nagar,Ludhiana', 'India', 'India', '141001', '+918591819500', '+918591819500', '1993-11-25', '20150223123729.png', 'dsfdsfdsfds', 'sdfsdfsdfsdfsdf', 2, '2015-02-23 13:29:27', '2015-02-23 07:59:27');
+INSERT INTO `t_profile` (`id`, `title`, `first_name`, `last_name`, `email`, `address1`, `address2`, `country`, `city`, `postcode`, `phone`, `mobile`, `dob`, `file`, `description`, `availability`, `user_id`, `created_at`, `updated_at`, `qualification`, `experience`) VALUES
+(1, 'Prof', 'fgf', 'Kumar', 'gopalkumar315@gmail.com', 'h.no 256,Islam gunj,prem nagar,Ludhiana', 'h.no 256,Islam gunj,prem nagar,Ludhiana', 'India', 'Ludhiana', '141001', '+918591819500', '+918591819500', '1993-11-25', '20150226064559.png', 'dsfdsfdsfds', 'sdfsdfsdfsdfsdf', 2, '2015-02-27 18:10:34', '2015-02-27 12:40:34', 'fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff ', 'fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff fdgdff ');
 
 -- --------------------------------------------------------
 
@@ -160,8 +261,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `last_login`, `email`, `password`, `reset`, `confirm_code`, `confirm_status`, `remember_token`, `created_at`, `updated_at`, `type`, `username`, `last_logout`) VALUES
-(1, '2015-02-24 15:35:57', 'abc@gmail.com', '$2y$10$QsPTHMoV1Bcd75UlmbL3fOlG9JdBOFcXbN.cLQliom.L68xvfFHbC', 'tj1aeZmQ6ZjOL76dwXV3Zx1LgtpoXlcc2DQLTIyxgsYTC2FMaGMOFToC4jvR', '', 1, 'YsGqQQfilSXlUaMyAWl717yF4be5xvnm5Ht5XQxKAVeuZFcrbPncCvJ4vYth', '2015-02-21 17:37:35', '2015-02-07 01:31:14', 'admin', 'abc@gmail.com', '0000-00-00 00:00:00'),
-(2, '2015-02-24 18:55:33', 'gopalkumar315@gmail.com', '$2y$10$F/QILt7kFhglvV1hdwLYFuDlCmBWC7GVxcJZafs145V2MYTGkEgoy', '', 'tj1aeZmQ6ZjOL76dwXV3Zx1LgtpoXlcc2DQLTIyxgsYTC2FMaGMOFToC4jvR', 0, 'QcNukpfyjtLAS4Huat5AsQdVliqflET1K8h04FwPiBrS8TUCso3dtS7KVCzz', '2015-02-24 18:55:33', '2015-02-24 13:25:33', 'tutor', 'gopalkumar315', '2015-02-24 12:57:23');
+(1, '2015-02-24 19:24:06', 'abc@gmail.com', '$2y$10$QsPTHMoV1Bcd75UlmbL3fOlG9JdBOFcXbN.cLQliom.L68xvfFHbC', 'tj1aeZmQ6ZjOL76dwXV3Zx1LgtpoXlcc2DQLTIyxgsYTC2FMaGMOFToC4jvR', '', 1, 'xfi42mSuZb2US3yUTKYxmENSWejXYmWDgz07vJCJgwKthGPbeEwzJD9CPDAI', '2015-02-24 19:24:06', '2015-02-24 13:54:06', 'admin', 'abc@gmail.com', '2015-02-24 13:54:06'),
+(2, '2015-02-27 18:25:09', 'gopalkumar315@gmail.com', '$2y$10$F/QILt7kFhglvV1hdwLYFuDlCmBWC7GVxcJZafs145V2MYTGkEgoy', '', 'tj1aeZmQ6ZjOL76dwXV3Zx1LgtpoXlcc2DQLTIyxgsYTC2FMaGMOFToC4jvR', 0, 'CNo2ve2eqqo9eJXievh9aTb0jHJU4dzbXL0lXe8V6sgnwl9uSgJWnr8DaZxC', '2015-02-27 18:25:09', '2015-02-27 12:55:09', 'tutor', 'gopalkumar315', '2015-02-27 12:55:09');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

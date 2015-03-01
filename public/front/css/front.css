@@ -338,6 +338,16 @@
     border-radius: 22px;
 }
 
+.submit_btn{
+
+    outline:none;
+    border:none;
+    background:#7AA3E6;
+    color:#fff;
+    padding:10px 15px;
+}
+
+
 /*about page*/
 .about p{
     margin:17px 0px;

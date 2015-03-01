@@ -27,14 +27,7 @@ class TindexController extends Controller{
         echo json_encode($response);
     }
 
-//    demo function
-    public function getInfo(){
-        print_r(new DateTime);
-        echo date('Y-m-y H:i:s');
-    }
-
     public function postProfileupdate(){
-
         $input = Input::all();
         $rule = array(
             'last_name' => 'required',
@@ -85,7 +78,7 @@ class TindexController extends Controller{
 
         $rule=array(
             'old_password'=>'required',
-            'password'=>'required|',
+            'password'=>'required|min:6',
             'password_confirm'=>'required|same:password'
         );
 
@@ -109,4 +102,47 @@ class TindexController extends Controller{
         Auth::tutor()->logout();
         return Redirect::to('index/signin');
     }
+
+    //social links
+    public function getSocial(){
+        $data=Social::where('user_id',Auth::tutor()->get()->id)->first();
+        return View::make('tutor.social_links')->with('data',$data);
+    }
+
+    public function postSocial(){
+        $input=Input::all();
+        $rule=array(
+            'facebook'=>'required|url',
+            'linked_in'=>'required|url',
+            'google_plus'=>'required|url',
+            'twitter' =>'required|url'
+        );
+        $message=array(
+            'url'=>'enter the valid url'
+        );
+
+        $v=Validator::make($input,$rule,$message);
+
+        if($v->fails()){
+            return Redirect::back()->withInput()->withErrors($v->errors());
+        } else {
+            Social::where('user_id',Auth::tutor()->get()->id)->update($input);
+            return Redirect::back()->with('success','Socials links has successfully saved');
+        }
+    }
+
+    // Privacy
+    public function getPrivacy(){
+        return View::make('tutor.privacy');
+    }
+
+
+
+    //    demo function
+    public function getInfo(){
+        print_r(new DateTime);
+        echo date('Y-m-y H:i:s');
+    }
+
+
 }

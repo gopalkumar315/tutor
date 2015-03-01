@@ -16,24 +16,24 @@
                 </div>
 
                 <div class="box_border">
+                    <div class="form">
+                        <table>
+                            <tr>
+                                <td>Account Type:</td>
+                                <td><b> {{ data.type|capitalize }}</b></td>
+                            </tr>
 
-                       <table>
-                           <tr>
-                               <td>Account Type: </td>
-                               <td> <b> {{ data.type|capitalize }}</b></td>
-                           </tr>
+                            <tr>
+                                <td>Your reference link:</td>
+                                <td><b> {{ url_to('tutor/'~data.id) }}</b></td>
+                            </tr>
 
-                           <tr>
-                               <td>Your reference link: </td>
-                               <td> <b> {{ url_to('tutor/'~data.id) }}</b></td>
-                           </tr>
-
-                           <tr>
-                               <td>Last Login: </td>
-                               <td> <b> {{ data.last_login|date('d-M-y h:i:s') }}</b></td>
-                           </tr>
-                       </table>
-
+                            <tr>
+                                <td>Last Login:</td>
+                                <td><b> {{ data.last_login|date('d-M-y h:i:s') }}</b></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
 
             </div>

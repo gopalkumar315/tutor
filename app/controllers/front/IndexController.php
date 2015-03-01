@@ -57,15 +57,16 @@ class IndexController extends Controller{
         return Category::where('parent','0')->get();
     }
 
+//    get course
     public function getCourse($id){
         return Subject::where('subject_id',$id)->get(array('id','name'));
     }
 
+//    find tutor
     public function postTutor(){
         $data= Input::all();
         return View::make('front/find_tutor');
     }
-
 
 //    tutor sign up
     public function getSignup(){
@@ -73,7 +74,6 @@ class IndexController extends Controller{
     }
 
 //  tutor sign  in
-
     public function getSignin(){
         return View::make('tutor.signin');
     }
@@ -82,5 +82,38 @@ class IndexController extends Controller{
     public function getForgot(){
         return View::make('tutor.forgot');
     }
+
+    public function getFeedback(){
+        return View::make('front.feedback');
+    }
+
+    //submit feedback form
+    public function postFeedback(){
+        $input=Input::all();
+        $rule=array(
+            'name'=>'required',
+            'email'=>'required|email',
+            'message'=>'required'
+        );
+
+        $v=Validator::make($input,$rule);
+        if($v->fails()){
+            return Redirect::back()->withInput()->withErrors($v->errors());
+        }else{
+
+            $data=array(
+                'description'=>$input['message'],
+                'name'=>$input['name'],
+                'email'=>$input['email']
+            );
+
+            if(Auth::tutor()->check()){
+                $data['user_id']=Auth::tutor()->get()->id;
+            }
+            Feedback::create($data);
+            return Redirect::back()->with('success','Thanks for your feedback');
+        }
+    }
+
 
 }

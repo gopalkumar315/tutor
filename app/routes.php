@@ -11,6 +11,7 @@
 |
 */
 
+
 //front//
 Route::Controller('index', 'IndexController');
 Route::Controller('tutor','TutorController');
@@ -20,6 +21,9 @@ Route::Controller('tutor','TutorController');
  */
 Route::group(array('prefix' => 'tpanel', 'before' => 'tutor'), function(){
 	Route::controller('index','TindexController');
+
+//	document , location & feedback other small content controller
+	Route::controller('document','TdocumentController');
 });
 
 

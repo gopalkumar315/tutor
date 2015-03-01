@@ -1,0 +1,82 @@
+{% extends 'layouts/front.twig' %}
+{% block javascript %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    {% endblock %}
+{% block breadcrumb %}
+    <div class="breadcrumb">
+        <a href="{{ url_to('index/feedback') }}" title="Feedback">Feedback</a>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="about">
+        <h1>Feedback</h1>
+        <p>Your feedback is very essential for us to provide best service.</p>
+    </div>
+
+
+    <div class="col-md-10" style="padding:0px; ">
+        <div class="signup">
+
+            {% if session_has('success') %}
+                <div class="success_alert">{{ session_get('success') }}</div>
+            {% endif %}
+
+            <div class="pi">
+                <div class="title">Your Feedback</div>
+            </div>
+            <div class="form">
+                <br/>
+                <form action="{{ url_to('index/feedback') }}" method="post">
+                <table>
+                    <tr>
+                        <td>Your name</td>
+                        <td>
+                            <input type="text" value="{{ input_old('name') }}" name="name" class="txt_box"/>
+                            <div class="error">
+                                {{ errors.first('name') }}
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Your Email</td>
+                        <td>
+                            <input type="text" value="{{ input_old('email') }}" name="email" class="txt_box"/>
+                            <div class="error">
+                                {{ errors.first('email') }}
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Message</td>
+                        <td>
+                            <textarea name="message" class="textarea" id="" cols="30" rows="8">{{ input_old('message') }}</textarea>
+                            <div class="error">
+                                {{ errors.first('message') }}
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>{{  Recaptcha.render() }}</td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td>
+                            <br/>
+                            <input type="submit" class="submit_btn" value="Send feedback" />
+
+                        </td>
+                    </tr>
+
+                </table>
+                    <br/>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

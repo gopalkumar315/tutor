@@ -1,0 +1,43 @@
+{% extends 'layouts/tutor.twig' %}
+{% block title %}My Documents{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="content">
+
+                <div class="heading">
+                    <h1>My Documents</h1>
+                    <p><b>Notify :</b> Once you updated your documents you are not able to modify, it will be editable or deleted by server administrator.for that you have to submit your request. thanks </p>
+                </div>
+
+                <div class="box">
+                    <div class="title">
+                        Update Documents
+                    </div>
+                </div>
+
+                <div class="box_border">
+                    <div class="form">
+                        <form action="{{ url_to('tpanel/document/document') }}" enctype="multipart/form-data"  method="post">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="file" name="file[]" multiple required="required"/>
+                                        <div class="error">all the files are of jpeg,png format type</div>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="submit_btn">Update</button>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

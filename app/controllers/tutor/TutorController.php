@@ -21,7 +21,7 @@ class TutorController extends Controller
             'phone' => 'required',
             'mobile' => 'required',
             'username' => 'required|unique:user',
-            'password' => 'required',
+            'password' => 'required|min:6',
             'password_confirm' => 'required|same:password',
             'description' => 'required',
             'availability' => 'required'
@@ -44,6 +44,7 @@ class TutorController extends Controller
 
             //userid
             $user_id = Login::where('username', Input::get('username'))->pluck('id');
+            Social::create(array('user_id',$user_id));
 
             $data = new Tprofile();
             $data->title = Input::get('title');
@@ -81,10 +82,14 @@ class TutorController extends Controller
             return Redirect::back()->withInput()->withErrors($v->errors());
         } else {
 
+
+            $field = filter_var(Input::get('username'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
             $input = array(
-                'username' => Input::get('username'),
-                'password' => Input::get('password')
+                $field => Input::get('username'),
+                'password' => Input::get('password'),
             );
+
+
 
             Auth::tutor()->attempt($input, true);
             if (Auth::tutor()->check()) {
@@ -177,5 +182,7 @@ class TutorController extends Controller
             return Redirect::to('index/signin')->with('success','Please Login, password has reset ');
         }
     }
+
+
 
 }
