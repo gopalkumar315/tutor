@@ -59,7 +59,7 @@ class TindexController extends Controller{
             $data->description = Input::get('description');
             $data->availability = Input::get('availability');
             $data->save();
-            return Redirect::back()->with('success', 'Your account has successfully created. Thanks');
+            return Redirect::back()->with('success', 'Your profile has updated successfully .');
         }
     }
 
@@ -133,9 +133,16 @@ class TindexController extends Controller{
 
     // Privacy
     public function getPrivacy(){
-        return View::make('tutor.privacy');
+        $data=Privacy::where('user_id',Auth::tutor()->get()->id)->first();
+        $profile=Tprofile::where('user_id',Auth::tutor()->get()->id)->first();
+        return View::make('tutor.privacy')->with('data',$data)->with('profile',$profile);
     }
-
+    //    privacy
+    public function postPrivacy(){
+        $input=Input::all();
+        Privacy::where('user_id',Auth::tutor()->get()->id)->update($input);
+        return Redirect::back()->with('success','Updation Successful');
+    }
 
 
     //    demo function

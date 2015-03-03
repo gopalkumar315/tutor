@@ -46,6 +46,11 @@
     border-radius: 22px;
 }
 
+.box_border .form .chkbox{
+    position: relative;
+    top: 3px;
+    margin-right: 5px;
+}
 
 /*tutor index*/
 

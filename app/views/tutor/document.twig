@@ -11,6 +11,10 @@
                     <p><b>Notify :</b> Once you updated your documents you are not able to modify, it will be editable or deleted by server administrator.for that you have to submit your request. thanks </p>
                 </div>
 
+                {% if session_has('success') %}
+                    <div class="success_alert">{{ session_get('success') }}</div>
+                {% endif %}
+
                 <div class="box">
                     <div class="title">
                         Update Documents
@@ -24,7 +28,6 @@
                                 <tr>
                                     <td>
                                         <input type="file" name="file[]" multiple required="required"/>
-                                        <div class="error">all the files are of jpeg,png format type</div>
                                     </td>
                                     <td>
                                         <button type="submit" class="submit_btn">Update</button>
@@ -37,7 +40,56 @@
                 </div>
 
 
+
+
             </div>
         </div>
     </div>
+
+    <div class="row-fluid" ng-app="MyApp" ng-controller="DocumentController">
+        <div class="content">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h1>Your Documents</h1>
+                </div>
+
+                <div class="col-sm-6 col-md-3" ng-repeat="item in items" >
+                    <a  class="thumbnail fancybox" rel="group" href="{{ asset('tutor/documents/'~'{{ item.file }}') }}">
+                        <img style="height:150px;" src="{{ asset('tutor/documents/'~'{{ item.file }}') }}">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('tutor/css/jquery.fancybox.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('tutor/js/jquery.fancybox.pack.js') }}"></script>
+    <script src="{{ asset('front/js/angular.min.js') }}"></script>
+    <script>
+        var app=angular.module('MyApp',[]);
+        app.controller('DocumentController',function($scope,$http){
+            $scope.Enable_img=false;
+            $scope.items=[];
+
+            $http.get('{{ url_to('tpanel/document/documentimg') }}').success(function(data){
+                console.log(data);
+                $scope.items=data;
+            }).error(function(data){
+                console.log(data);
+            })
+
+        })
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".fancybox").fancybox();
+        });
+    </script>
 {% endblock %}

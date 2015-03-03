@@ -44,6 +44,16 @@
                                 </tr>
 
                                 <tr>
+                                    <td>Teaching Level</td>
+                                    <td>
+                                        <textarea name="level" cols="30" rows="7" class="textarea">{{ input_old('level',data.level) }}</textarea>
+                                        <div class="error">
+                                            {{ errors.first('level') }}
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
                                     <td></td>
                                     <td><button type="submit" class="submit_btn">Update</button></td>
                                 </tr>

@@ -10,6 +10,11 @@
                     <h1>Privacy</h1>
                 </div>
 
+
+                {% if session_has('success') %}
+                    <div class="success_alert">{{ session_get('success') }}</div>
+                {% endif %}
+
                 <div class="box">
                     <div class="title">
                         Public Privacy
@@ -19,30 +24,60 @@
 
                 <div class="box_border">
                     <div class="form">
-                        <table>
-                            <tr>
-                                <td>Show Mobile Number</td>
-                                <td>+919988286432</td>
-                                <td><input type="checkbox" class="chk_box"/></td>
-                            </tr>
+                        <form action="{{ url_to('tpanel/index/privacy') }}" method="post">
+                            <table>
+                                <tr>
+                                    <td>Show Mobile Number</td>
+                                    <td>{{ profile.mobile }}</td>
+                                    <td>
+                                        <input type="hidden" name="mobile" value="0"/>
+                                        <input type="checkbox" name="mobile" value="1"  {% if (data.mobile == 1) %} checked {% endif %} class="chk_box"/>
 
-                            <tr>
-                                <td>Show Phone Number</td>
-                                <td>+919988286432</td>
-                                <td><input type="checkbox" class="chk_box"/></td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                            <tr>
-                                <td>Show Email</td>
-                                <td>gopalkumar315@gmail.com</td>
-                                <td><input type="checkbox" class="chk_box"/></td>
-                            </tr>
+                                <tr>
+                                    <td>Show Phone Number</td>
+                                    <td>{{ profile.phone }}</td>
+                                    <td>
+                                        <input type="hidden" name="phone" value="0"/>
+                                        <input type="checkbox" {% if (data.phone == 1) %} checked {% endif %}  name="phone" value="1" class="chk_box"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Show Email</td>
+                                    <td>{{ profile.email }}</td>
+                                    <td>
+                                        <input type="hidden" name="email" value="0"/>
+                                        <input type="checkbox" name="email"  {% if (data.email == 1) %} checked {% endif %} value="1" class="chk_box"/>
 
 
-                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Show Both Address</td>
+                                    <td>
+                                        {{ profile.address1 }}
+                                        <br/>
+                                        {{ profile.address2 }}
+                                    </td>
+                                    <td>
+                                        <input type="hidden" name="address" value="0"/>
+                                        <input type="checkbox" name="address" {% if (data.address == 1) %} checked {% endif %} value="1" class="chk_box"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><button type="submit" class="submit_btn">Save</button></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

@@ -7,39 +7,22 @@
             <div class="content">
                 <div class="heading">
                     <h1>Location</h1>
+                    <div class="text-right"><button  ng-click="update_location()">Update Current Location</button></div>
                 </div>
 
-                <div class="box">
+                <div class="box" ng-show="Enable_map">
                     <div class="title">
                         My Location
                     </div>
                 </div>
 
-                <div class="box_border">
+                <div class="box_border" ng-show="Enable_map">
                     <div class="form">
-                        <div id="show_map">
-                            ghh
+                        <div id="show_map" >
+
                         </div>
                     </div>
                 </div>
-
-
-                <div class="box">
-                    <div class="title">
-                        Uplodate Location
-                    </div>
-                </div>
-
-                <div class="box_border">
-                    <div class="form">
-                        <table>
-                            <tr>
-                                <td><button class="submit_btn">Update Current Location</button> </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -55,57 +38,81 @@
         app.controller('LocationController',function($scope,$http){
            $scope.show_map=false;
            $scope.items=[];
+           $scope.Enable_map=false;
+           $scope.long='';
+           $scope.lat='';
+           $scope.position=[];
+
 
            $http.get('{{ url_to('tpanel/document/mylocation') }}').success(function(data){
-               if(data.length > 0){
-
-                   if(navigator.geolocation)
-                   {
-                       navigator.geolocation.getCurrentPosition(showCurrentLocation);
-                   }
-                   else
-                   {
-                       alert('geo location not fount');
-                   }
-
+               if(data.length > 0) {
+                    $scope.set_location(data[0].latitude,data[0].longitude);
                }
            }).error(function(data){
                console.log(data);
            });
 
-            function showCurrentLocation(position)
-            {
-                var longitude=position.coords.longitude;
-                var latitude=position.coords.latitude;
-                var coords = new google.maps.LatLng(latitude, longitude);
+            $scope.update_location=function(){
 
-                alert(coords);
+                if(navigator.geolocation)
+                {
+                    navigator.geolocation.getCurrentPosition(function(position){
+                    $scope.long=position.coords.longitude;
+                    $scope.lat=position.coords.latitude;
+                    $scope.position={'longitude':$scope.long,'latitude':$scope.lat};
+//                        post method
+                    console.log($scope.position);
+
+                    $http.post('{{ url_to('tpanel/document/mylocation') }}',$scope.position).success(function(data){
+                        alert('Your Current Location has updated Successfully');
+                        $scope.set_location(data[0].latitude,data[0].longitude);
+                    }).error(function(data){
+                        console.log(data);
+                    });
+                    });
+
+                }
+                else
+                {
+                    alert('geo location not fount');
+                }
+            }
+
+//          showing location
+            $scope.set_location=function(lat,long){
+                var marker;
+                var infowindow = new google.maps.InfoWindow();
+                geocoder = new google.maps.Geocoder();
+                var coords = new google.maps.LatLng(lat,long);
                 var mapOption= {
                     zoom:15,
                     center:coords,
                     mapTypeControl:true,
-                    streetViewControl: false,
                     mapTypeId:google.maps.MapTypeId.ROADMAP
                 };
                 map=new google.maps.Map(
                         document.getElementById('show_map'),mapOption
                 );
-
-                var marker = new google.maps.Marker({
-                    position: coords,
-                    map: map,
-                    title: "Current location!"
+                geocoder.geocode({'latLng': coords}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            map.setZoom(11);
+                            marker = new google.maps.Marker({
+                                position: coords,
+                                map: map
+                            });
+                            console.log(results[0].formatted_address);
+                            infowindow.setContent(results[0].formatted_address);
+                            infowindow.open(map, marker);
+                        } else {
+                            alert('No results found');
+                        }
+                    } else {
+                        alert('Geocoder failed due to: ' + status);
+                    }
                 });
-
-                marker.setMap(map);
-
-
-                var infowindow = new google.maps.InfoWindow({
-                    content:"Hello World!"
-                });
-                infowindow.open(map,marker);
-             }
-
+                $scope.Enable_map=true;
+            }
         });
     </script>
 
@@ -113,7 +120,6 @@
 {% block stylesheets  %}
     <style>
         #show_map{
-            width: 500px;
             height:500px;
         }
     </style>

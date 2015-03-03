@@ -15,6 +15,10 @@
                     <h1>{{ data.title ~' '~ data.first_name }}'s Profile</h1>
                 </div>
 
+                {% if session_has('success') %}
+                    <div class="success_alert">{{ session_get('success') }}</div>
+                {% endif %}
+
                 <div class="box">
                     <div class="title">Profile Photo</div>
                 </div>
@@ -128,14 +132,14 @@
                             <tr>
                                 <td>Title</td>
                                 <td>
-                                    <select class="select" name="title" id="">
+                                    <select class="select" name="title" id="title">
                                         <option value="">Select:</option>
                                         <option value="Mr">Mr</option>
                                         <option value="Miss">Miss</option>
                                         <option value="Mrs">Mrs</option>
                                         <option value="Dr">Dr</option>
                                         <option value="Prof">Prof</option>
-                                        <option value="{{ data.title }}" selected>{{ data.title }}</option>
+                                        {#<option value="{{ data.title }}" selected>{{ data.title }}</option>#}
                                     </select>
                                 </td>
                             </tr>
@@ -191,10 +195,9 @@
                             <tr>
                                 <td>County</td>
                                 <td>
-                                    <select class="select" name="country" id="">
+                                    <select class="select" name="country" id="country">
                                         <option value="">Country :</option>
                                         <option value="India">India</option>
-                                        <option value="{{ data.country }}" selected>{{ data.country }}</option>
                                     </select>
                                 </td>
                             </tr>
@@ -202,10 +205,9 @@
                             <tr>
                                 <td>City</td>
                                 <td>
-                                    <select class="select" style="margin-top:3px;" name="city" id="">
+                                    <select class="select" style="margin-top:3px;" name="city" id="city">
                                         <option value="">City :</option>
                                         <option value="Ludhiana">Ludhiana</option>
-                                        <option value="{{ data.city }}" selected>{{ data.city }}</option>
                                     </select>
                                 </td>
                             </tr>
@@ -247,7 +249,7 @@
                             <tr>
                                 <td>Date of Birth</td>
                                 <td>
-                                    <select class="date_select" style="margin-top:3px;" name="day" id="">
+                                    <select class="date_select" style="margin-top:3px;" name="day" id="day">
 
                                         <option value="">day</option>
                                         <option value="01">01</option>
@@ -281,11 +283,9 @@
                                         <option value="29">29</option>
                                         <option value="30">30</option>
                                         <option value="31">31</option>
-                                        <option value="{{ data.dob|date('d') }}"
-                                                selected="selected">{{ data.dob|date('d') }}</option>
                                     </select>
 
-                                    <select class="date_select" style="margin-top:3px;" name="month" id="">
+                                    <select class="date_select" style="margin-top:3px;" name="month" id="month">
                                         <option value="">month</option>
                                         <option value="01">January</option>
                                         <option value="02">February</option>
@@ -299,11 +299,9 @@
                                         <option value="10">October</option>
                                         <option value="11">November</option>
                                         <option value="12">December</option>
-                                        <option value="{{ data.dob|date('m') }}"
-                                                selected="selected">{{ data.dob|date('M') }}</option>
                                     </select>
 
-                                    <select class="date_select" style="margin-top:3px;" name="year" id="">
+                                    <select class="date_select" style="margin-top:3px;" name="year" id="year">
                                         <option value="">year</option>
                                         <option value="2009">2011</option>
                                         <option value="2009">2010</option>
@@ -397,9 +395,6 @@
                                         <option value="1922">1922</option>
                                         <option value="1921">1921</option>
                                         <option value="1920">1920</option>
-
-                                        <option value="{{ data.dob|date('Y') }}"
-                                                selected="selected">{{ data.dob|date('Y') }}</option>
                                     </select>
                                 </td>
                             </tr>
@@ -487,4 +482,42 @@
 {% block javascripts %}
     <script src="{{ asset('tutor/js/cropper.min.js') }}"></script>
     <script src="{{ asset('tutor/js/main.js') }}"></script>
+
+    <script>
+        for(var i=1;i<=document.getElementById('title').options.length;i++){
+            if(document.getElementById('title').options[i].value == "{{ data.title }}"){
+                document.getElementById('title').options[i].selected=true;
+            }
+        }
+
+        for(var i=1;i<=document.getElementById('month').options.length;i++){
+            if(document.getElementById('month').options[i].value == "{{ data.dob|date('m') }}"){
+                document.getElementById('month').options[i].selected=true;
+            }
+        }
+
+        for(var i=1;i<=document.getElementById('year').options.length;i++){
+            if(document.getElementById('year').options[i].value == "{{ data.dob|date('Y') }}"){
+                document.getElementById('year').options[i].selected=true;
+            }
+        }
+
+        for(var i=1;i<=document.getElementById('day').options.length;i++){
+            if(document.getElementById('day').options[i].value == "{{ data.dob|date('d') }}"){
+                document.getElementById('day').options[i].selected=true;
+            }
+        }
+
+        for(var i=1;i<=document.getElementById('country').options.length;i++){
+            if(document.getElementById('country').options[i].value == "{{ data.country }}"){
+                document.getElementById('country').options[i].selected=true;
+            }
+        }
+
+        for(var i=1;i<=document.getElementById('city').options.length;i++){
+            if(document.getElementById('city').options[i].value == "{{ data.city }}"){
+                document.getElementById('city').options[i].selected=true;
+            }
+        }
+    </script>
 {% endblock %}

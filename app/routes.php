@@ -24,6 +24,7 @@ Route::group(array('prefix' => 'tpanel', 'before' => 'tutor'), function(){
 
 //	document , location & feedback other small content controller
 	Route::controller('document','TdocumentController');
+	Route::controller('subject','TsubjectController');
 });
 
 
