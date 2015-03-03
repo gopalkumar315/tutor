@@ -1,8 +1,7 @@
 {% extends 'layouts/tutor.twig' %}
-{% block title %}  Subjects {% endblock %}
-
+{% block title %}Subject{% endblock %}
 {% block content %}
-    <div class="row-fluid" ng-app="MyApp" ng-controller="SubjectController">
+    <div class="row-fluid">
         <div class="col-md-12">
             <div class="content">
                 <div class="heading">
@@ -11,91 +10,36 @@
 
                 <div class="box">
                     <div class="title">
-                        Add Subject
+                        Tutor's Subject
                     </div>
                 </div>
 
                 <div class="box_border">
-                    <div class="form">
-                        <table>
-                            <tr>
-                                <td>Select Category</td>
-                                <td>
-                                    <select name="" id="" ng-change="subject()" ng-model="cat_id" class="select">
-                                        <option value="">Select</option>
-                                        {% for sub in data %}
-                                            <option value="{{ sub.id }}">{{ sub.name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </td>
-                                <td>
-                                    <a href="{{ url_to('tpanel/subject') }}" class="submit_btn">Save</a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="box_border">
-                    <div class="form" style="padding-bottom: 20px;">
+                     {% for category in data %}
                         <div class="row">
-                            <div ng-repeat="item in items">
-                                <div class="col-md-3 col-sm-6 col-xs-12" >
-                                    <input  type="checkbox" class="chkbox" ng-checked="item.check==1 ? true : false" ng-click="save(item.id)" />
-                                    <label for="">{{ '{{ item.name }}' }}</label>
-                                </div>
+                            <div class="col-md-6">
+                                <b>Category :-</b> {{ category.category_name }}
+                                <br/>
+                                <b>Subjects :-</b>
+                                <br/>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a href="{{ url_to('tpanel/subject/modify') }}" class="btn btn-sm btn-primary">Add</a>
+                                <a href="{{ url_to('tpanel/subject/modify') }}" class="btn btn-sm btn-danger">Delete</a>
                             </div>
                         </div>
-                    </div>
-                </div>
 
+                        <div class="row">
+                            {% for subject  in category.subjects %}
+                                <div class="col-md-3 col-sm-6 col-xs-6">
+                                    {{ subject.subject_name }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <hr/>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-{% endblock %}
-
-
-
-{% block javascripts %}
-    <script src="{{ asset('front/js/angular.min.js') }}"></script>
-    <script>
-        var app=angular.module('MyApp',[]);
-        app.controller('SubjectController',function($scope,$http){
-            $scope.items=[];
-
-            /*subject list on basis on category*/
-            $scope.subject=function(){
-                $http.get('{{ url_to('tpanel/subject/list') }}/'+$scope.cat_id).success(function(data){
-                    $scope.items=data;
-                    console.log(data);
-                }).error(function(data){
-                    console.log(data);
-                });
-            };
-
-            /*function called when click on check box*/
-            $scope.save=function(sub_id){
-                $scope.data={'category_id':$scope.cat_id,'subject_id':sub_id};
-                $http.post('{{ url_to('tpanel/subject/save') }}',$scope.data).success(function(data){
-                    $scope.refresh();
-                }).error(function(data){
-                    console.log(data);
-                });
-            }
-
-            /*refresh for subject list*/
-            $scope.refresh=function(){
-                $scope.subject=function(){
-                    $http.get('{{ url_to('tpanel/subject/list') }}/'+$scope.cat_id).success(function(data){
-                        $scope.items=data;
-                        console.log(data);
-                    }).error(function(data){
-                        console.log(data);
-                    });
-                };
-            }
-
-
-        });
-    </script>
 {% endblock %}

@@ -8,10 +8,28 @@
 
 class TsubjectController extends Controller{
 
+    /*show subject*/
     public function getIndex(){
-        $data=Category::all();
+        $data=Tsubject::where('user_id',Auth::tutor()->get()->id)->groupBy('category_id')->get();
+        $data1=array();
+        foreach($data as $row){
+            $row->category_name=$row->category()->pluck('name');
+            $data1=Tsubject::where('category_id',$row->category_id)->where('user_id',$row->user_id)->get(array('subject_id'));
+            foreach($data1 as $row1){
+               $row1->subject_name=$row1->subject()->pluck('name');
+            }
+            $row->subjects=$data1;
+        }
+
+//        return $data;
         return View::make('tutor.subject')->with('data',$data);
     }
+
+    /*modify addition subtraction deletion of subject  */
+     public function getModify(){
+         $data=Category::all();
+         return View::make('tutor.modify_subject')->with('data',$data);
+     }
 
     // get subject list
     public function getList($id){
@@ -25,6 +43,7 @@ class TsubjectController extends Controller{
         return $content;
     }
 
+    /*angular request to save into database*/
     public function postSave(){
         $data=json_decode(file_get_contents('php://input'));
         $count=Tsubject::where('category_id',$data->category_id)->where('subject_id',$data->subject_id)->where(

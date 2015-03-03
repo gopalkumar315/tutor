@@ -15,7 +15,14 @@ class Tsubject extends Eloquent implements UserInterface, RemindableInterface  {
     public $timestamps=false;
 
     public function user(){
-
         return $this->hasOne('Login','id','user_id');
+    }
+
+    public function category(){
+        return $this->hasOne('Category','id','category_id');
+    }
+
+    public function subject(){
+        return $this->hasOne('Subject','id','subject_id');
     }
 }

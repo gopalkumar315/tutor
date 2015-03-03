@@ -14,4 +14,6 @@ class Subject extends Eloquent implements UserInterface, RemindableInterface  {
     public function sub_cat(){
         return $this->hasOne('Category','id','subject_id');
     }
+
+
 }
