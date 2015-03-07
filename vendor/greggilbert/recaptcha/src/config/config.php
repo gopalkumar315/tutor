@@ -14,7 +14,7 @@ return array(
 	|
 	*/
 	'public_key'	=> '6LcGCQATAAAAAKUiPsfJ6XE3aCqCnvg-WhTrLtG_',
-	'private_key'	=> 'fdgfdgfdgfdgfdgdfg',
+	'private_key'	=> '6LcGCQATAAAAANJUnnX0DM4djDornbfPszjVzSzS',
 	
 	/*
 	|--------------------------------------------------------------------------

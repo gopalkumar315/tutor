@@ -41,7 +41,7 @@ return array(
 	|
 	*/
 
-	'port' => 465,
+	'port' => 587,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'gopalkumar315@gmail.com', 'name' => 'gopal'),
+	'from' => array('address' => 'gopalkumar315@gmail.com', 'name' =>'gopal kumar'),
 
 	/*
 	|--------------------------------------------------------------------------

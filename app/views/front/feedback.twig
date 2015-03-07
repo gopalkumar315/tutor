@@ -60,7 +60,12 @@
 
                     <tr>
                         <td></td>
-                        <td>{{  Recaptcha.render() }}</td>
+                        <td>
+                            <div class="g-recaptcha" data-sitekey="6LcGCQATAAAAAKUiPsfJ6XE3aCqCnvg-WhTrLtG_"></div>
+                             <div class="error">
+                                {{ errors.first('g-recaptcha-response') }}
+                            </div>
+                        </td>
                     </tr>
 
                     <tr>

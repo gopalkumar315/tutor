@@ -9,6 +9,20 @@
 class TutorController extends Controller
 {
 
+    /*get states*/
+    public function getState(){
+        return City::orderBy('state')->groupBy('state')->get();
+    }
+
+    /*get cities wrt state*/
+    public function postCities(){
+        $state=json_decode(file_get_contents("php://input"));
+        return City::where('state',$state->state)->get();
+
+    }
+
+
+
     public function postSignup()
     {
         $input = Input::all();
@@ -44,12 +58,14 @@ class TutorController extends Controller
 
             //userid
             $user_id = Login::where('username', Input::get('username'))->pluck('id');
-            Social::create(array('user_id',$user_id));
+            Social::create(array('user_id'=>$user_id));
 
             $data = new Tprofile();
             $data->title = Input::get('title');
             $data->first_name = Input::get('first_name');
             $data->last_name = Input::get('last_name');
+            $data->state=Input::get('state');
+            $data->gender=Input::get('gender');
             $data->email = Input::get('email');
             $data->address1 = Input::get('address1');
             $data->address2 = Input::get('address2');
@@ -63,18 +79,34 @@ class TutorController extends Controller
             $data->availability = Input::get('availability');
             $data->user_id = $user_id;
             $data->save();
-            return Redirect::back()->with('success', 'Your account has successfully created. Thanks');
+            $data=array(
+                'url'=>URL::to('tutor/confirm'.$confirm_code.'/'.Input::get('username')),
+            );
+
+            Mail::send('emails.tutor_signup_confirm',$data, function($message) use ($data){
+                $message->to(Input::get('email'))->subject('Tutor Account confirmed');
+            });
+
+            return Redirect::back()->with('success', 'Your account has successfully created. check your email to confirm !!');
         }
     }
 
+    /*account confirmation*/
+    public function getConfirm($code,$username){
+        Login::where('confirm_code',$code)->where('username',$username)->update(array(
+            'confirm_status'=>'1',
+            'confirm_code'=>''
+        ));
+        return Redirect::to('index/signin')->with('success','your account has confirmed, Pleas login');
+    }
+
+
     public function postSignin()
     {
-
         $input = Input::all();
-
         $rule = array(
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         );
 
         $v = Validator::make($input, $rule);
@@ -82,18 +114,21 @@ class TutorController extends Controller
             return Redirect::back()->withInput()->withErrors($v->errors());
         } else {
 
-
             $field = filter_var(Input::get('username'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
             $input = array(
                 $field => Input::get('username'),
                 'password' => Input::get('password'),
             );
 
-
-
             Auth::tutor()->attempt($input, true);
-            if (Auth::tutor()->check()) {
-               return Redirect::to('tpanel/index');
+            if (Auth::tutor()->check()){
+
+               if(Auth::tutor()->get()->confirm_status!=0 && Auth::tutor()->get()->type=== 'tutor'){
+                   return Redirect::to('tpanel/index');
+               }else{
+                   Auth::tutor()->logout();
+                   return Redirect::back()->with('success','Please confirm account');
+               }
             } else {
                 return Redirect::back()->with('success','Invalid Username/Password')->withInput(Input::except('password'))->withErrors($v->errors());
             }
@@ -124,13 +159,12 @@ class TutorController extends Controller
                 $content=array(
                     'link' => URL::to('tutor/reset/'.$data->username.'/'.$reset_code)
                 );
-                print_r($content);
 
-//                Mail::send('emails.tutor_reset_password', $content, function ($message) use ($data) {
-//                    $message->to($data->email, 'Tutor Password Reset')->subject('Tutor Password Reset');
-//                });
+                Mail::send('emails.tutor_reset_password', $content, function ($message) use ($data) {
+                    $message->to('gopalkumar315@gmail.com', 'Tutor Password Reset')->subject('Tutor Password Reset');
+                });
 
-              //  return Redirect::back()->with('success','Reset password link has send to you email. thanks!');
+                return Redirect::back()->with('success','Reset password link has send to you email. thanks!');
 
             }else{
                 return Redirect::back()->with('success','Username does not exists.')->withInput();

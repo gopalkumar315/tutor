@@ -140,7 +140,14 @@ class TindexController extends Controller{
     //    privacy
     public function postPrivacy(){
         $input=Input::all();
-        Privacy::where('user_id',Auth::tutor()->get()->id)->update($input);
+        $count=Privacy::where('user_id',Auth::tutor()->get()->id)->count();
+        if($count>0){
+            Privacy::where('user_id',Auth::tutor()->get()->id)->update($input);
+        }else{
+            $input['user_id']=Auth::tutor()->get()->id;
+            Privacy::create($input);
+        }
+
         return Redirect::back()->with('success','Updation Successful');
     }
 

@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'YourSecretKey!!!',
+	'key' => 'fdgfdgfdgfdgfdgdfg',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -122,8 +122,9 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Ollieread\Multiauth\MultiauthServiceProvider',
-		'TwigBridge\ServiceProvider',
 		'Greggilbert\Recaptcha\RecaptchaServiceProvider',
+		'TwigBridge\ServiceProvider'
+
 
 
 	),

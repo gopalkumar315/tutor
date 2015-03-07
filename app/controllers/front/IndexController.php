@@ -24,7 +24,6 @@ class IndexController extends Controller{
 
     //particular feature view
     public function getViewfeature($id){
-
         $feature=Feature::find($id);
         return View::make('front.feature_view')->with('feature',$feature);
     }
@@ -84,36 +83,51 @@ class IndexController extends Controller{
     }
 
     public function getFeedback(){
+
+
+//      return 0;
+//         Recaptcha::render();
+//        print_r(get_included_files());
+//        exit;
         return View::make('front.feedback');
     }
 
     //submit feedback form
     public function postFeedback(){
+
         $input=Input::all();
         $rule=array(
             'name'=>'required',
             'email'=>'required|email',
-            'message'=>'required'
+            'message'=>'required',
+            'g-recaptcha-response' => 'required',
         );
+        $captcha=new Captcha();
+        $res = $captcha->check(Input::get('g-recaptcha-response'));
 
-        $v=Validator::make($input,$rule);
-        if($v->fails()){
-            return Redirect::back()->withInput()->withErrors($v->errors());
-        }else{
+        if($res['success'])
+        {
+            $v=Validator::make($input,$rule);
+            if($v->fails()){
+                return Redirect::back()->withInput()->withErrors($v->errors());
+            }else{
 
-            $data=array(
-                'description'=>$input['message'],
-                'name'=>$input['name'],
-                'email'=>$input['email']
-            );
+                $data=array(
+                    'description'=>$input['message'],
+                    'name'=>$input['name'],
+                    'email'=>$input['email']
+                );
 
-            if(Auth::tutor()->check()){
-                $data['user_id']=Auth::tutor()->get()->id;
+                if(Auth::tutor()->check()){
+                    $data['user_id']=Auth::tutor()->get()->id;
+                }
+                Feedback::create($data);
+                return Redirect::back()->with('success','Thanks for your feedback');
             }
-            Feedback::create($data);
-            return Redirect::back()->with('success','Thanks for your feedback');
+        } else {
+            return Redirect::back()->with('success','sending failed');
         }
-    }
 
+    }
 
 }

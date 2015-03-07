@@ -72,6 +72,36 @@ class TdocumentController extends Controller{
         return View::make('tutor.request');
     }
 
+    /*request save*/
+    public function postRequestsave(){
+        $data=json_decode(file_get_contents('php://input'));
+        Trequest::create(array(
+            'question'=>$data->question,
+            'user_id'=>Auth::tutor()->get()->id
+        ));
+
+        $request=array(
+            'question'=>$data->question,
+            'name' => Tprofile::where('user_id',Auth::tutor()->get()->id)->pluck('first_name'),
+            'timestamps'=>date('d-M-Y H:i:s')
+        );
+
+        Mail::send('emails.tutor_request', $request, function ($message) use ($request) {
+            $message->to(Auth::tutor()->get()->email, 'Tutor request')->subject('Tutor Request');
+        });
+
+    }
+
+    /*tutor request answer*/
+    public function getRequestshow(){
+        $data=Trequest::where('user_id',Auth::tutor()->get()->id)->get();
+        foreach($data as $row ){
+            $row->responses=$row->response()->get();
+        }
+
+        print_r($data);
+    }
+
     //qualication
     public function getQualification(){
         $data=Tprofile::where('user_id',Auth::tutor()->get()->id)->first(array('qualification','experience','level'));

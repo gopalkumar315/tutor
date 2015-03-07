@@ -6,9 +6,11 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
+	    "greggilbert/recaptcha": "1.1.*",
 		"rcrowe/twigbridge": " 0.6.*",
 	  	"ollieread/multiauth": "dev-master",
-	  	"greggilbert/recaptcha": "~1.1"
+		"illuminate/support": "~5.0"
+
 
 	},
 	"autoload": {
